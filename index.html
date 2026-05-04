@@ -3,6 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<base id="dm-site-base" href="./">
+<script>
+(function () {
+  var b = document.getElementById('dm-site-base');
+  if (!b) return;
+  if (location.protocol === 'file:') {
+    b.href = new URL('.', location.href).href;
+    return;
+  }
+  var path = location.pathname || '/';
+  if (path.endsWith('.html')) path = path.replace(/[^/]*$/, '');
+  else if (!path.endsWith('/')) path += '/';
+  if (!path.endsWith('/')) path += '/';
+  b.href = location.origin + path;
+})();
+</script>
 <title>DiscourseMap — A Canvas Plugin</title>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
