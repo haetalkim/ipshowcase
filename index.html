@@ -348,6 +348,10 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 .kit-name{font-size:14px;font-weight:900;color:var(--navy);margin-bottom:4px;}
 .kit-desc{font-size:12.5px;color:var(--muted);line-height:1.5;}
 .kit-dl{flex:0 0 auto;font-size:12px;font-weight:900;color:var(--orange);white-space:nowrap;}
+.kit-card--soon{position:relative;cursor:default;pointer-events:none;background:#f6f8fa;}
+.kit-card--soon:hover{border-color:var(--border);box-shadow:none;}
+.kit-card-soon-blur{display:flex;align-items:center;gap:16px;flex:1;min-width:0;filter:blur(5px);opacity:.55;user-select:none;}
+.kit-soon-badge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;font-size:12px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);background:rgba(255,255,255,.94);border:1px solid var(--border);padding:9px 18px;border-radius:999px;box-shadow:0 6px 20px rgba(20,32,64,.1);}
 
 /* FAQ */
 .faq-section{background:#fff;padding:64px 48px;border-bottom:1px solid var(--border);}
@@ -900,14 +904,16 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
         </div>
         <span class="kit-dl">Download ↓</span>
       </a>
-      <a href="#" class="kit-card" role="button" aria-label="Download Insights Report">
-        <div class="kit-icon">📊</div>
-        <div class="kit-meta">
-          <div class="kit-name">Insights Report</div>
-          <div class="kit-desc">Sample instructor dashboard summary with cluster and gap metrics.</div>
+      <div class="kit-card kit-card--soon" aria-disabled="true" aria-label="Insights Report — coming soon">
+        <div class="kit-card-soon-blur">
+          <div class="kit-icon">📊</div>
+          <div class="kit-meta">
+            <div class="kit-name">Insights Report</div>
+            <div class="kit-desc">Sample instructor dashboard summary with cluster and gap metrics.</div>
+          </div>
         </div>
-        <span class="kit-dl">Download ↓</span>
-      </a>
+        <span class="kit-soon-badge">Coming soon</span>
+      </div>
     </div>
   </div>
 </section>
