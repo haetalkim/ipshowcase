@@ -19,7 +19,7 @@
   b.href = location.origin + path;
 })();
 </script>
-<title>DiscourseMap — A Canvas Plugin</title>
+<title>DiscourseMap — An LMS Plugin</title>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -126,8 +126,8 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 .story-h{font-size:14px;font-weight:900;color:var(--navy);line-height:1.25;margin-bottom:8px;}
 .story-t{font-size:12.5px;color:var(--muted);line-height:1.65;}
 
-/* Canvas LMS install mock */
-.canvas-mock{max-width:920px;margin:0 auto;text-align:left;}
+/* LMS install mock */
+.lms-mock{max-width:920px;margin:0 auto;text-align:left;}
 .cm-chrome{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#fff;box-shadow:0 8px 32px rgba(27,61,107,.08);}
 .cm-global-nav{flex:0 0 48px;background:#394B58;display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:6px;}
 .cm-gn-dot{width:26px;height:26px;border-radius:6px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(255,255,255,.55);}
@@ -146,9 +146,9 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 .cm-status{display:none;align-items:center;gap:8px;font-size:12px;font-weight:900;}
 .cm-status.installing{color:var(--muted);}
 .cm-status.installed{color:var(--green);}
-.canvas-mock.is-installing .cm-status.installing{display:inline-flex;}
-.canvas-mock.is-installed .cm-status.installed{display:inline-flex;}
-.canvas-mock.is-installed .cm-install-btn{display:none;}
+.lms-mock.is-installing .cm-status.installing{display:inline-flex;}
+.lms-mock.is-installed .cm-status.installed{display:inline-flex;}
+.lms-mock.is-installed .cm-install-btn{display:none;}
 .cm-spinner{width:14px;height:14px;border-radius:50%;border:2px solid rgba(0,0,0,.12);border-top-color:var(--orange);animation:cmSpin .9s linear infinite;}
 @keyframes cmSpin{to{transform:rotate(360deg);}}
 @keyframes cmIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
@@ -178,7 +178,7 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 
 /* DiscourseMap panel (appears after install) */
 .cm-dm-panel{display:none;margin:14px 18px 18px;border:1px solid var(--border);border-radius:6px;overflow:hidden;background:#fff;}
-.canvas-mock.is-installed .cm-dm-panel{display:block;animation:cmIn .35s ease;}
+.lms-mock.is-installed .cm-dm-panel{display:block;animation:cmIn .35s ease;}
 .cm-dm-collapsed{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--soft);border-bottom:1px solid var(--border);}
 .cm-dm-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(0,172,24,.12);}
 .cm-dm-title{font-size:12px;font-weight:900;color:var(--navy);}
@@ -189,7 +189,7 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 .cm-dm-btn.primary{border-color:var(--orange);background:var(--orange);color:#fff;}
 .cm-dm-btn.primary:hover{opacity:.9;}
 .cm-dm-expanded{display:none;background:#f8fafc;}
-.canvas-mock.dm-open .cm-dm-expanded{display:block;}
+.lms-mock.dm-open .cm-dm-expanded{display:block;}
 .cm-dm-expanded-head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid var(--border);background:#fff;}
 .cm-dm-expanded-left{display:flex;align-items:center;gap:10px;min-width:0;}
 .cm-dm-expanded-left img{width:18px;height:18px;object-fit:contain;}
@@ -198,9 +198,9 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 .cm-dm-preview{padding:10px 12px;}
 .cm-dm-preview img{width:100%;height:auto;display:block;border:1px solid var(--border);border-radius:6px;}
 .cm-dm-note{padding:0 12px 12px;font-size:11px;color:var(--muted);line-height:1.5;}
-.canvas-mock-foot{text-align:center;margin-top:16px;font-size:13px;}
-.canvas-mock-foot a{color:var(--blue);font-weight:700;text-decoration:none;}
-.canvas-mock-foot a:hover{text-decoration:underline;}
+.lms-mock-foot{text-align:center;margin-top:16px;font-size:13px;}
+.lms-mock-foot a{color:var(--blue);font-weight:700;text-decoration:none;}
+.lms-mock-foot a:hover{text-decoration:underline;}
 
 /* STATS */
 .stats-row{background:var(--navy);}
@@ -335,6 +335,37 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 .footer-links{display:flex;gap:20px;}
 .footer-link{font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;font-weight:700;transition:color .15s;}
 .footer-link:hover{color:var(--orange);}
+
+/* IMPLEMENTATION KIT */
+.kit-section{background:var(--soft);padding:64px 48px;border-bottom:1px solid var(--border);}
+.kit-inner{max-width:1060px;margin:0 auto;}
+.kit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:28px;}
+@media(max-width:720px){.kit-grid{grid-template-columns:1fr;}}
+.kit-card{display:flex;align-items:center;gap:16px;padding:18px 20px;background:#fff;border:1px solid var(--border);border-radius:8px;text-decoration:none;color:inherit;cursor:pointer;transition:border-color .15s,box-shadow .15s;}
+.kit-card:hover{border-color:#9AACB8;box-shadow:0 8px 24px rgba(20,32,64,.08);}
+.kit-icon{flex:0 0 44px;height:44px;border-radius:8px;background:var(--soft);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--navy);}
+.kit-meta{flex:1;min-width:0;}
+.kit-name{font-size:14px;font-weight:900;color:var(--navy);margin-bottom:4px;}
+.kit-desc{font-size:12.5px;color:var(--muted);line-height:1.5;}
+.kit-dl{flex:0 0 auto;font-size:12px;font-weight:900;color:var(--orange);white-space:nowrap;}
+
+/* FAQ */
+.faq-section{background:#fff;padding:64px 48px;border-bottom:1px solid var(--border);}
+.faq-inner{max-width:800px;margin:0 auto;}
+.faq-list{margin-top:28px;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#fff;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{width:100%;text-align:left;padding:16px 18px;font-family:'Lato',sans-serif;font-size:14px;font-weight:900;color:var(--navy);background:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.faq-q:hover{background:var(--soft);}
+.faq-q::after{content:'+';font-size:18px;color:var(--muted);font-weight:400;line-height:1;}
+.faq-item.open .faq-q::after{content:'−';}
+.faq-a{display:none;padding:0 18px 16px;font-size:13.5px;color:var(--muted);line-height:1.7;}
+.faq-item.open .faq-a{display:block;}
+.faq-expert{margin-top:36px;padding:26px 28px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.faq-expert h3{font-size:18px;font-weight:900;color:#fff;margin-bottom:8px;}
+.faq-expert p{font-size:13.5px;color:rgba(255,255,255,.72);line-height:1.65;max-width:520px;}
+.faq-expert .btn-ghost{color:#fff;border-color:rgba(255,255,255,.35);}
+.faq-expert .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08);}
 </style>
 </head>
 <body>
@@ -346,23 +377,23 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
     <span class="nav-name">discoursemap</span>
   </a>
   <div class="nav-div"></div>
-  <span class="nav-sub">A Canvas LMS Plugin</span>
+  <span class="nav-sub">An LMS Plugin</span>
   <ul class="nav-links">
     <li><a href="#features">Features</a></li>
-    <li><a href="#findings">Research</a></li>
-    <li><a href="#theory">Framework</a></li>
-    <li><a href="https://haetalkim.github.io/discourse-map/" target="_blank" class="nav-cta">Try Live Demo ↗</a></li>
+    <li><a href="#implementation-kit">Implementation Kit</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#demo" class="nav-cta">Get Started</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">Canvas LMS Plugin &nbsp;·&nbsp; Teachers College, Columbia University</div>
+  <div class="hero-eyebrow">LMS Plugin &nbsp;·&nbsp; Teachers College, Columbia University</div>
   <h1 class="hero-title">See what your discussion<br>is <span class="accent">actually saying.</span></h1>
-  <p class="hero-sub">DiscourseMap transforms flat Canvas threads into a live spatial map — showing what's been explored, where consensus is forming, and what's been left unsaid.</p>
+  <p class="hero-sub">DiscourseMap transforms flat discussion threads into a live spatial map — showing what's been explored, where consensus is forming, and what's been left unsaid.</p>
   <div class="hero-actions">
-    <a href="https://haetalkim.github.io/discourse-map/" target="_blank" class="btn btn-primary">Open Live Prototype ↗</a>
-    <a href="#demo" class="btn btn-ghost">See it in action ↓</a>
+    <a href="#demo" class="btn btn-primary">See it in your LMS ↓</a>
+    <a href="#implementation-kit" class="btn btn-ghost">Implementation Kit</a>
   </div>
 </section>
 
@@ -387,7 +418,7 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
   <div class="problem-inner">
     <div>
       <div class="section-label">The Problem</div>
-      <h2 class="section-title">Canvas discussions hide the structure of thinking.</h2>
+      <h2 class="section-title">LMS discussions hide the structure of thinking.</h2>
       <p class="section-sub" style="max-width:720px">
         In graduate seminars, asynchronous forums are meant to support reflective, student-led dialogue. In practice, many students post minimally, choose reply targets based on convenience, and stop once requirements are met — not because of low motivation, but because the interface makes it hard to see where ideas connect, diverge, or need improvement.
       </p>
@@ -423,14 +454,14 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
     <div class="section-label">Design &amp; Evaluation</div>
     <h2 class="section-title">A plugin layer — not a new forum.</h2>
     <p class="section-sub" style="max-width:720px">
-      In one sentence: DiscourseMap keeps the Canvas thread, but adds a layer that makes the discussion’s structure visible.
+      In one sentence: DiscourseMap keeps the native discussion thread, but adds a layer that makes the discussion’s structure visible.
     </p>
 
     <div class="story-grid">
       <div class="story-card">
         <div class="story-tag"><span class="story-icon">★</span>Layer</div>
         <div class="story-h">Keep the thread</div>
-        <div class="story-t">No migration. Students read and write in the normal Canvas discussion.</div>
+        <div class="story-t">No migration. Students read and write in the normal LMS discussion board.</div>
       </div>
       <div class="story-card">
         <div class="story-tag"><span class="story-icon">★</span>Reveal</div>
@@ -448,9 +479,9 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 
 <!-- INSTALL CTA -->
 <section class="install-section" id="install">
-  <div class="install-title">Install DiscourseMap on your Canvas course.</div>
-  <div class="install-sub">One click. No configuration. Works directly within your existing Canvas discussion boards — no platform migration needed.</div>
-  <div class="canvas-mock" id="demo">
+  <div class="install-title">Install DiscourseMap in your course.</div>
+  <div class="install-sub">One click. No configuration. Works directly within your existing LMS discussion boards — no platform migration needed.</div>
+  <div class="lms-mock" id="demo">
     <div class="cm-chrome">
       <div class="cm-global-nav" aria-hidden="true">
         <div class="cm-gn-dot on">▣</div>
@@ -490,7 +521,7 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
           <div class="cm-main">
             <div class="cm-main-head">
               <div class="cm-main-title">Week 3: What counts as “progress” in a knowledge-building discussion?</div>
-              <div class="cm-main-sub">A regular Canvas discussion thread — before DiscourseMap is installed, it’s just a chronological list.</div>
+              <div class="cm-main-sub">A regular discussion thread — before DiscourseMap is installed, it’s just a chronological list.</div>
             </div>
 
             <div class="cm-dm-panel" id="cm-dm-panel">
@@ -509,7 +540,7 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
                 <div class="cm-dm-expanded-head">
                   <div class="cm-dm-expanded-left">
                     <img src="assets/discoursemap-mark.png" alt="">
-                    <div class="cm-dm-expanded-name">Discourse Map <span class="cm-dm-expanded-sub">· visualization overlay (mock)</span></div>
+                    <div class="cm-dm-expanded-name">Discourse Map <span class="cm-dm-expanded-sub">· visualization overlay</span></div>
                   </div>
                   <div class="cm-dm-actions">
                     <a class="cm-dm-btn primary" href="https://haetalkim.github.io/discourse-map/" target="_blank" rel="noopener">Open Full View ↗</a>
@@ -517,9 +548,9 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
                   </div>
                 </div>
                 <div class="cm-dm-preview">
-                  <img src="assets/canvas-with-dm-2.png" alt="DiscourseMap visualization mock">
+                  <img src="assets/canvas-with-dm-2.png" alt="DiscourseMap visualization">
                 </div>
-                <div class="cm-dm-note">This is a UI mock (not embedded). Use “Go to Live Prototype” to open the interactive version.</div>
+                <div class="cm-dm-note">Preview embedded in the discussion view. Use Open Full View for the expanded experience.</div>
               </div>
             </div>
 
@@ -585,7 +616,7 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
         </div>
       </div>
     </div>
-    <p class="canvas-mock-foot"><a href="https://haetalkim.github.io/discourse-map/" target="_blank" rel="noopener">Open full prototype in a new tab ↗</a></p>
+    <p class="lms-mock-foot"><a href="https://haetalkim.github.io/discourse-map/" target="_blank" rel="noopener">Open interactive demo in a new tab ↗</a></p>
   </div>
 </section>
 
@@ -743,7 +774,7 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
     <div id="tab-usertesting" class="tab-pane">
       <div class="section-label">User Testing Results</div>
       <h2 class="section-title">What we learned from real participants.</h2>
-      <p class="section-sub">6 Columbia graduate students in a live session using the Firebase-backed prototype with real-time shared state.</p>
+      <p class="section-sub">6 Columbia graduate students in a live pilot session with real-time shared state.</p>
 
       <div class="persona-row six" aria-label="User testing participants">
         <div class="persona-card">
@@ -823,13 +854,8 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
           <h2 class="section-title">Grounded in four pillars.</h2>
           <p class="section-sub" style="margin-top:12px">DiscourseMap is a theoretically grounded intervention at the structural level of asynchronous discourse — designed for graduate-level seminars.</p>
           <div style="margin-top:28px">
-            <div class="section-label" style="margin-bottom:12px">IP Project · Teachers College, Columbia University</div>
-            <div class="team-row">
-              <div class="team-pill">Bongseo Park</div>
-              <div class="team-pill">Guiyoung Jeon</div>
-              <div class="team-pill">Jiin Hur</div>
-              <div class="team-pill">Yves Hong</div>
-            </div>
+            <div class="section-label" style="margin-bottom:12px">DiscourseMap · Teachers College, Columbia University</div>
+          </div>
           </div>
         </div>
         <div class="fw-grid">
@@ -843,6 +869,88 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
   </div>
 </section>
 
+<!-- IMPLEMENTATION KIT -->
+<section class="kit-section" id="implementation-kit">
+  <div class="kit-inner observe">
+    <div class="section-label">Implementation Kit</div>
+    <h2 class="section-title">Everything you need to launch DiscourseMap.</h2>
+    <p class="section-sub" style="max-width:640px">Downloadable resources for instructors and program leads. Select a file to save a copy to your device.</p>
+    <div class="kit-grid">
+      <a href="#" class="kit-card" role="button" aria-label="Download Educator Guide">
+        <div class="kit-icon">📘</div>
+        <div class="kit-meta">
+          <div class="kit-name">Educator Guide</div>
+          <div class="kit-desc">Setup steps, facilitation tips, and discussion prompts for seminar use.</div>
+        </div>
+        <span class="kit-dl">Download ↓</span>
+      </a>
+      <a href="#" class="kit-card" role="button" aria-label="Download Syllabus Template">
+        <div class="kit-icon">📄</div>
+        <div class="kit-meta">
+          <div class="kit-name">Syllabus Template</div>
+          <div class="kit-desc">Sample language for outcomes, participation, and map-based activities.</div>
+        </div>
+        <span class="kit-dl">Download ↓</span>
+      </a>
+      <a href="#" class="kit-card" role="button" aria-label="Download Toggle Guide">
+        <div class="kit-icon">⚙️</div>
+        <div class="kit-meta">
+          <div class="kit-name">Toggle Guide</div>
+          <div class="kit-desc">When to enable map view, gap indicators, and epistemic prompts by week.</div>
+        </div>
+        <span class="kit-dl">Download ↓</span>
+      </a>
+      <a href="#" class="kit-card" role="button" aria-label="Download Insights Report">
+        <div class="kit-icon">📊</div>
+        <div class="kit-meta">
+          <div class="kit-name">Insights Report</div>
+          <div class="kit-desc">Sample instructor dashboard summary with cluster and gap metrics.</div>
+        </div>
+        <span class="kit-dl">Download ↓</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="faq-inner observe">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">Common questions</h2>
+    <p class="section-sub">Quick answers for instructors adopting DiscourseMap in an LMS course.</p>
+    <div class="faq-list" id="faq-list">
+      <div class="faq-item open">
+        <button type="button" class="faq-q">How do I add DiscourseMap to an existing course?</button>
+        <div class="faq-a">Install the plugin from your institution’s LMS app directory, then enable it on the discussion boards you want to enhance. No student accounts or separate login are required.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q">Does DiscourseMap replace our discussion tool?</button>
+        <div class="faq-a">No. Students continue reading and posting in the native LMS thread. DiscourseMap adds a visualization layer on top—structure, gaps, and prompts appear alongside familiar workflows.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q">What do students see before they post?</button>
+        <div class="faq-a">Until a student contributes to the thread, the map stays collapsed. After their first post, they can expand the map to explore clusters and suggested contribution areas.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q">Is discussion content stored outside the LMS?</button>
+        <div class="faq-a">Posts remain in your LMS. The map layer processes thread text to generate clusters and indicators; your institution’s data policies for the LMS still apply.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q">Can I use this in large courses?</button>
+        <div class="faq-a">Yes. The map scales with thread size and is designed for seminars and medium-sized courses. For very large sections, we recommend enabling the map on focused weekly discussions rather than every board.</div>
+      </div>
+    </div>
+    <div class="faq-expert">
+      <div>
+        <h3>Still need help?</h3>
+        <p>Book a one-on-one session with an implementation specialist. We’ll walk through setup, facilitation moves, and how to align DiscourseMap with your syllabus.</p>
+      </div>
+      <a href="#" class="btn btn-ghost" role="button">Talk to an expert</a>
+    </div>
+  </div>
+</section>
+
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
@@ -850,17 +958,34 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
       <img class="footer-icon" src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAKgAtIDASIAAhEBAxEB/8QAHQABAQEAAgMBAQAAAAAAAAAAAQACAwgFBgcECf/EAEMQAAIBAwMDAgMFBQUGBgMBAAABAgMEEQUhMQYSQQdRE2FxCBQiMpEVQoGhsSMzYsHRJFJygpLhFkNTY3OiJnTC0v/EABwBAQABBQEBAAAAAAAAAAAAAAABAgMEBQYHCP/EADsRAQACAQMCBAQDBQYGAwAAAAABAgMEBREhMQYSQVETIjJxFGGhQoHB4fAVI1KRsdEHFjNicvEkNFP/2gAMAwEAAhEDEQA/AO5AoDQEAhwBYIshyAo0uDKNIAYIWAEWEILkCQ/IGIEREBZLwDLwAhks/IkBJDguBfAATDJAKBiDAhBD4AQYImAkCECySBosgOSyC3HAEWSZY2AOWWBwPAGWhRckBMgECYNEIEkXBcIgLJA0KAGQsPIChAAEuCIAbJCQEyRYLgCeCWAZZAmQlj5gHkSICF8A2SAi4HIcgWQY4BgC5NAuR8ACNBgcgBA2S9wFEwyIF4IgYCGCQgXBNkWPmBImQZAvIh8yASIgDAkyQEZfJpmXyBCkWBAgQgBNiBAQrYEhYESRFkCZEZ8gaIyKAcEyTJgAkgYFjcWSJgSJgmTAmXJYJASIcktwJEx4BgGSwWBW4AhyRAREQERAgEuSICIiAiBC2AMkOxATJFkvAAyRGkBY2Ms0zICiZFkAYpk0HAGuQKJMAJEtxYA2KBCAvgEWckAMRMgRCiYEyIgJoskyAsgxDAEuR8FggAQYrcCRMQYB5IPIgIZEOQJEIY3AUTJMs5AMkWCAmyIAHJL3AUAoiYZASYIcgQMsiAZHIYECaLBIQAyzTMvkBIkxAiIgICZAS5EPmKQAkJImBAS5HwAJCiBgaYAiYCQImBeRBCBF4BCgDBM0DAC8gxQCiYouQMoiaJASQsiAETEgAck+A8gOSZBkCECzkByHJEtgEyL3FACEsfMgIGTJAS5NfQAA0gFAwDyaRnPyJALISYAXA5JgGQLAAaDyJl8gaIEaAiZAwgCgySCS0CIQLwDEgAuGPgGBEWCAmWDS+hAZSEWAEA5ABJkQEkA5ABIskBIQHIAzLNMMASRIBAQJFgCYkiAsFwKBgREACCe5fIsAOSwCNMAwWCICYeRICLIAwNIgRZAUTJEwDBEOfkBEPjgAJkgwKAcAyyKAyWRZkByWCQgTDAln5AQYIUBAhZAHkSICLkiQEGCZIB8YDAkBEDICZIlyIE2S5DkQJkHkUBMMC+S5Ag8iACRIsgAkQETIGwEGyRMCQsEOQIB5ICIsEDlbiyyZYCQL3HIAwEQImGRAyRogBCkX0ICZIN8iBZIiAGSJ5FICSJkweQEdjKECZZIHyAkHA5ABDyIEhZkQAcAhyBEg5FADLAtAgHBYFEAEyIASHBIQADWwATJewNigIMi+A8gJY+RYFgGCyReAIGXyEDO4oQAgEEBpE+SRZ3AGSEsAWCwJPgAfAISAiRBkCZF5ECIiAgyIYAmSYpAwFmXyaDAEuCYkAEiJgJYBC2BImgTH6gCJiQEiyA4yBEWCAEJE+ADyTLyTAiZYEDIoGOQFhkuSwBZJFguAEiRMARrkMCgDAomGQFgiAB4JIGIEwIsATIQYCDZIsASHAYFARMGXgBIyKAUWBRBAyWSYZCV5EzkeQFMWBAREQBgjWCwAIgIByWQECwDyJYAEPAgBPgHyIAQpEi4AmGBIARosAwBsQwIB5EMbjwAIhIC8EWSwBcAxbBAIeRyHkBDkhQEiIvAA2WSwQFkuS5JIC4LkmS4AkTIfAEiZEAIUyBsByQZICbIkiwBeRwQZAQe4kAYLA+CQERMkAC+CICBmvAYAkyAcARYIgFAy3JgCQ4JDkCQMiAiwSJsA4EgwBFkSAskWCwBY+RYJkBFksF4AiwRIAZIWCAmSYlgCEOCAQZEgEiIAaImQERMPIGi2Mt4JMBwPgzkO4nhHLSJoExyQDAhlFkJPBeSfAbgLYZEsASJkiYAhMvk0gLGAyLLAGUTNAwA0CRZAmIIQJsyxZICRMmAEhHAeQHBCuAYBwRcjgCQMWAAKJIUgAjRAWxlkS5Aiwx8AAoGIAWSTLBAJEQEhwBZAsk3sQeQEfAJCgLYMDgMgQMSYBuQocACRMeDLYFkUzDZdwGmSBG0gAkOC2AshkXsDAiDJZA0gZImAciRbAQCQBuK5IgFhgsk2BECIB5LgkTYDyRYMylgCbwZfBPfc8V1H1DpOgWjutUu6dKmvPci5jx3yWitI5mVF8laVm1p4h5Fy3wTmorMpwS+cj4N1r6+UqFWdtoFKleQ3Xf3YwfJ9d9SuqtTrSnG8rWsX+7Cp/wBjrdD4M1+piLZOKR+f+zQarxHpsE+WvNpdwbzXNKtnivdRjj/Ej8n/AIu6dzj7/DP1OlFxr2u15Zq6vdyz7zPz/tLVM5/aVzn/AIje08AV4+bN1+zW38Uzz8tXeuy17SLuajb3cJN/4keRck1mM4Nf8R0Kt9d1y3kpUdWu4te0z2TQfU7qrS6qlK6rXcV+7UqGJqPAWWvXDlifylexeKadIvR3PU98HInsfBuh/Xm3upRt9fp0rOK27u/OT7NoGuaXrlqrnS7qFam1nPccjuGz6vQTxnpxHv6f5t/pNx0+qj+6tz+Xq8pFmsGVtuKlk1bOPApg0S5IScAxBgDRLIosASJlkgJFsQYAQaEgBCy4IAeSRMlwAsyjTABRBkQHIBkuQEmHA52AHkUSICLJABogyQAQGgLGwYF+wZAceSzgMiBZECAmyLBICDAsPICHkUWAFEiQMCyHkhQEiY8HHVlhbAaMSqYCEs87fNnieoNd0jRbaVzqV3ShTjziayiYjmeETPDy3xdgc/kz4l1T9pD070pVKVjrNGpcQbTg5Z3Pmetfa8rUJSWnWNpdJZx/aJZL9dLlt2hbtlrDtv3/ACYp/JnSWr9sXrBz/s+mLFx8f7Uv/wDJ5DS/tha5Umo3+hWduvLVeMv8i5+Aze36wic9Idze7C8gquXg699Jfai6NvYRWu6jb2snylJbH1vpDrzpPqiCq6NqNOrFrKbksMsXw3p9UK4vEvbYvJo4XUj2qUJRmv8AC8jCbayWlbkZnyXcWQEvJJiBIuC4LkAZDggIiZAGBSIMgLQYFcEBBkmwA0mKMoZbIdxSeDhm1LLbSS3bZSlnK/U+OevHqfHpy2lo+lzjUvZrZd3CzvubDbduza/PGDDHMz+jF1erppcc5L9nlPVj1Y0/pW3qWWnzp3GoNf3bl44ydaeo+pda6iu6lzqF5XVOTyqPfmCPEXF1cXt1O7va061abbbm84ywcz2XZ9g022UiKRzf1t/s863HdM2tt808V9k3FcRWfoYnL5DnJibN55YlqongZDJEh5FS7jUJJGcGorcmaRJy2oxb4PYekurNb6XvqV1ZXVapSg8ui54izwFPGTl8FnNhx5aTjyRzE+kqsWS+O0WrPEu3vph6kaZ1dZwpzrQheLaUM8M9+S7dzodpWoXuk3kLzT686VSD4i8Jnaf0a9RbXqnTIWl3OMLun+Dtzu8HlPiTwvOh51Gn64/WPb+Tudm3yNTPwc3S3v7vpsZZE40+14NJ5OK4dM0DIGQlIQRAJBkQECBgRcFkGAgKJgQPk0iAFwTEgBISRAGPIpBksgINDkgDIplggLIMnuSACNEBkSwOALwZfIsANEGRAnuXACA5BhuIEWwMlkBQ5AG9wFgJJATM5N+Djk0BSlseO13V7DRtPqX2pXEKVGCy8ywzxPqJ1po3Q/T1zrGs3MaVOjByazvx7HQb1k9X+pPUjW6jp3Nex0ylOUaX3eu4/Fh4bWDK02mnNP5LOXLGOH3L1i+1JQtK09O6IhQ1F7wqOU+3tf1xudYup+rurOpL6rd6hrWo0IVJN/Ap3T7I58bYPE0oQprb8UnzJ8t+7KbybrFp6YY4rDW31Frzy/I7Wm25VW6s3zKaTbGNKnHZQiv4HK+QJms891HnmWVFeyOWMIPmK/Qx5OSLK4UyXbW893Tjn37Uft0/Utc0qoqmma5qNt2vKhTruMf0Pxpj3FXHup89o7PvXpX9pjqDQbm207qC2p/s9bVLqdbulhecYO3Xp715051tpqvNEvadVOKb/FyfzJm4Tj2zimvZo8p0b1h1F0TrdDVdFvLmcKMnJ20qzVOW3GDX6nSY79a9JZ2DUz2s/qT3POBTPkPoH6z6R6kaLFVK0KWq0YqNzSy0ozwtllbr5o+uJ4NRek0niWwieXKmbizjjubRQlrkuCRMByAb5ECLAGkAYLAkAcEyYNgHDHJlssgIOWw5WDhezlKT2iu4qiETL1b1Q6qodJ9NV76U4/FcXHDfudMta1G51jVq+o3dWdRzqSce55wm9kfTvtIdTz1fqKNhbVm6EItTintlNHydxxsj2TwntMaLRxltHz3/AEj2eeb7uE6jPNIn5as5eS7sEwOsiGgnqe5lncyKK4OCKBYElBxsWWREDcGac2cWScmUzCXL3v3P39M69d9N6zS1KzlJdv5o92E9zxTbMyTnBwfks5cdbxNbxzE91eO81mJju7ydA9R2/UvT9G8o1FKUY/jw/J7JTeUdYPsx9VytNT/YlxUahOTksv5nZuMsy7k/wy4PDt/2udv1lsUfT3j7PTNq1v4vTxae8dJc69iaBDk0baBbC+CJ8AHkVwRAQMSaAMEhB8gKJgiYEh8AhTAPJeR2ABQsCYEQZLICQE2BeS8khAkTJDyAEOCACyXLICDAp7kwIiQgArggYDgGGRABIeQMlgSAEa4RkmwMzmkzxfU+tWXT+i19V1CooUaUW22zyUop5lLhLJ08+2f6oV7i7pdGaPWj8C7hUhcyUnmOEv8AUv6fDOW8VhbyX8leXx/139R9W9SOsrhzuJ09Lsak6MIUqr7a0XjeS4fB6FtGKjFJJbLBpRjSoxpQ4ikm/LwYZ0NcdaRER6NPfJN56gcmWDeCeVHBYBnJIhJEGQQ0mTZkMk8nCkwUvcsA0UWjzK6zw/d0xr+qdIa9b9QaNWqQqW0nOVFTcYVNsfiS5/7H9D/Qf1J071E6WpXFOvTd9SilcxUtlPCyj+ccd9mtj3f0U9Qr3026qpXfxJfsitVdS75bTxthLnhGJnwTlr+cMzDm6xD+ly/Dt5OWDyerdB9aaH1jo9DUdNu6T+LBSw5bvJ7JUnKm+Hj3NLNZieJZ8S5wkcEa2fJpzz5IS2TkcbkvdGXNLygOZM2j8vxUnyh+OOB+kMnAqrf7r/QVUf8AuS/QDmZiTDvbX5JfoYqNpZf4V8wHIOW5wyrU1zc0o/WR+DU9Y07T7eVxc31CUI8qM1kuY6Te3EQoveKxzLyylttueg+sPXtn0loNaFOtCV7OLUYp85PUuvPXXRNOt6ttoM3Vu1mOJJ9v64OvHUeuah1HqU7/AFGtKUpNuMe5uKR3GweEs2bJGbV18tI9J7z/ACczuu/UpScennmZ9fSHDe3VW+v699Xbc61SU93nGWfnYKW2GXcerVrERxDhbTzIkZwaZMrQxgDbM4JTykxyjL5IHDaYnHFmshDQPkltuDe5TImMOcl4NRRRavMcJieHlOjdQnpPVFtdQk1lpPfHLR3g6frxvNFtK8ZZfw02dDJ5hVp1Fs4tf1O6npLdO66Uoybz2wSPPfHumj4WLNHfs63wvnn4l8b3BDgEx8HmEu2QkTACQvggJlkCSAiwPCBsCREh4AsERAWCDIgDJDggDBYLJcARYIsgAk0C5AUh4JE+QIiwQEGTWDIEhLwQAiFkBImQPIEuCJEAh5EkBEIY3AkcVdtLY5XsZa7ngD1D1X6nh0l0LqGsVJqCoUpSb+WD+bGuapPXep9V12pOc/vVf4lPufCa8ZO4H24+p1p3SdXRO/t++0JwS932s6W2y7LWjHh9iz+huNDTy083uwNVfno5m8nHJi2Y5Njz0a/gtmeRAhK8DEuRSAdiaDyOSUIyzQMhPIDBeR8kchijlioyWJJNM4lyckWVRHKOzznRfV3UfRWrQ1PRr2vV7OKFWvL4f6HZf05+1fpkqUaPWslQreY0oSkl/HB1PTFxhNb5T+Rby6bHlj5oXsepvV/RXQvWPobV6calpc/hlunJ4PZ6XVvT1ampwvqCT96iP5gShdR3o6he0v8AgryRmVxrEdo65qaX/wC3P/Uwr7dWO0sqmsie7+m131x01bf3l7Rf0meKuvVXoy2i3UuE8e0j+bMq2rSf4tZ1J/W6l/qZ/wBvl+bVL5/W4kW40Mesq51VfSX9Db3189ObRtVrmSweFvftR+lVt3RV5Wc14VOT/ojodChVf57y6l9azOeFtBczqS+smy7XQYvWZWp1do7O5t99rToWOVa3Fd+2bef+h69qP2t9M3+51ZP27qE1/kdV1SpJcP8AUJQprwXI0eCPRTOrtPo7Eaj9rnWUn9wpW9R+O6Ml/ketal9q71Eu4uELCxjH5Tf+iPjElHxEz2vxFicGGO1VP4i0Po2pevnqDqUJRnToU8+Y1Gfi0TqrqLqCtL9oahcxz+7GvLH6HpVKE/8Adx/A9i6Gt6v3qU5J4Oi8OYYrrKTWGu3PNzp7TPR7bGn2v8UpSfvJ5OeDCdN9yNRjg9UmPdw1rctEiDyTC22QISUIyJl8EpmA9yfsLAJSFcgK5CCGNxFEICRyLgEa8EArtfC/ijuH6FTc+jot+x05q5eI+7R3K9E6EqHR8VJYykzh/HcxGhpH5ul8MddTP2e9rg34MQ4RtbI8ks76FkTJpEJGRQMgEkTYZAiSFDgAInyWwERFtgAZISAB8FsQARBkDQBksgLIUONgMskJYAskRALAWZYC+ALJAIPYSAEL4IgBExwAEhIGAj5BCAT4Mw8jPgzT4YHSj7f9w6vVOgW6ez+I2v4Jf5nXGSwkvZHYD7dMnPrzQU+Eqv8A/J8Cmt8HQ6SP7iGp1U/O42ZZpoyy9LHhJiA+SQoQXAgD5LJEwJsGReQBEyYEJhpG4s4xTJiUcOZM0jiTNuUIR76k1CK5b4K4lTw3vj3OOcXy9vqeQ0TR+ouoJOHT2i1r+Kfa6lOccZ/ifWulvsy9Va7bQrajqN3ZNrLh2rYsZc1ad5ZGPT2s+HylTjzWhH6sz8e2XN1S/wCo7Qaf9kGcasZXGtV6q8qcY4f8j3rRfssdM0IR+929pXa57qUX/kYt9TijtK/XTT2l0njeWi/86m/+Y5IX1GUu2nT+JL2U0d/bH7OHp5QS+LoGnTa8/Aj/AKHm7L0P9P7Vr4ehWcf+GnFFMa7FCZ0kz2fz1o2uq3CTt9CuaqfGJR/1P0U+ner6/wDcdJ3kvpOJ/R219N+jrTCp6VRWPaKPJ23THTlsv7LToLH+FFm+uiey5XS1iOsP5qR6I9Qqn5Okb5Z/xR/1P1WXpp6lXdRQ/wDDl7QT/ebg/wDM/pZDTdJhtGzj/wBKOena2MH+C2iv+VFFdbNfTlVOmrL+e+m+hPXt1CLrfeaWfHw4nsmmejnWmj0sxhXuPk4JHe2DpJbUor+Ay+DJfipxf8Dabb4izaDJ8SlIn7sbUbbTPjnHaf0h0P1Dp3qDTU3f6TcQiuZPGDxeYt/hks+3k746toekarRlSu7SE1JY3SPjnqR6G2txCpe6C42k0m+2nFbncbb4202ot5NTXyTPr6OY1vhzJjr5sM+Z1xccGWfv1nTL/SL6djqVCdCtFtLu/eS8n4JI7PHki0RMTzy5m1JrPEpPfc1nYwKMhTwRwQkIYZYNYBkjJCWCErJpPYwKCJci3ORLY4o8nLB+/BTZMQ5tMtZ3usW9tTi5OTWV/FHd/ouxWn9N2tLzKmjq56BdOVdZ6up3c4ZoU8xy/fKO3NOmqVOlRjxTWDzDx3rYvlx6as/T1l2nhjTeWls0x36OaMdkawUeBPO3XM4ETIEOweCTAmRpoyA8FkMkBNkmGCAc7iZFAJAyXAESJggNPgETJAWCwTJAQ5AsgJZAcZAiIgLIMtxAEIMAFCiBgLIyKAclgBAmBMMga8B5FBjcAlwUFyawZbUQOkv297V0Or9AuMbf2mf4pf6HXab2T90dw/t09My1Dp9a2k8WNKVRP59rOm9KXfbUZvlwTf6G+0mSPgxDV6mkzfkyM43LO5pGV3YvAwSNABCXgAInwTIkDImBAmSQ8kkDkAzbRnt3wU26QmO7MqsKUHUqPEI8n2T0C9EtW6/1Cnqer0qtpplKf4aU0nCtHGzfy3/kej+jfSFXrn1DsdMnbyqadGUo3En+XK8P+R/SPpjRrbp3RLbTLKlGmqUFFtLkwdRqrUjiO7OwYI7y8b0X6fdM9J2UKOn6dQpyit3CCWT2hVGvwwSil8jkpcbi4xzk1NrTaeZZ0REdmO+o/KGOfJrApFKUllbl2Jmkh4A4/hRMSpo5mZfAHEqaFQNCgKMB+GhRocyOP4SMzk4rC48nM+DhmtyqJ57ol8h+0H0NS1vQamr2FqpX0Ft2pZxnc6tdso1J0qixUhJxkvbB3+qQhOE6dSKlGce1o6xev3ppW0m/qa7o9u3byy6kILZtvdnpHg7fKxH4LPP/AIz/AAcf4g2uZn8Rjj7x/F8ckt9gS8moONRZhu1s17GsI9KieOkuPkRWwM0zHBKlBgSJ5QPIsPJtbiYTDAHJ25CSwynlITOanTqXFWnaW8HUq1GsRXPJwTfb4zJ/lj7n3X7PfplWq3ceoNYoygot/Dpzw008bmt3PcsW36ec+We3aPeWZo9JfU5Ix09f0fUfRHpCn0303TnUjmrVXfl8rJ9CUcvPkxCMYRjTprEIbRSOaPB4RrdVk1ee2bJPWXp2l09NPijHXtBXAMWX1MRkAiewLkBwCEgECyDAcESZARJEyAsAxbACJkK3AkiaLJLcASFjgGBB5DIoCLAkAYEiAiIgIiRATBmlwDAMigwIBj5CKBgDDcjQGdyNMgBMeSwQDwcNdZRysxNZA9B9dOm31X6b6npUc91ajKGVyso/m3fWc9L1jUNHqScpWVX4WX5wj+rk4xnCdKazGSaOh/2vfTiv0x1jT6h0+zbsrjvq3tWOyTwsN+/k2GiyR9EyxtRTmOXw7tNJG4pShGcd4zXcvoWMG4rDVW6d2cA0bMsqUgyzQMiUjJERCT4JLJEghYwKFhuSHBY3RJivzITHRDsl9gm2tqlzrVWrBOpC+fa/b8MTudJL4jyjoZ9i7qGlpfWlxpFSajUvLqVSMfdJRR3xqS/Fn3NDq6zXJ1brFMTVyLg0jji9jaZiyvNYQoyjSICDEHsAAOSAMEkQoBJ8j4ABZxyRyMy0BxduT8+oWVtf2crO8pxqU5LGGj9mDEo5K63mJ5hTNYmOJdavV/0cuLCrV1jp6EqkW8yt6aSXO7Pi1ZOjXnQuY/d60HiUHyd/ZxhODpVIqUHs0z5z6hekmidR0p1LelC2rvfvglk9C2PxnOOIw63rHpb1/e5TcvD3nmcmn/ydRXF842ONr5n0HrD0n6l0OvL7nRrXlFeW0j0bUbHUbCWL6ylQ8ZbPQ9PrcOqiLYLxMT+bk8ukyYZmMlZh+ZgNPtmswl3IWjKi3XhjTHASyckUca2OSLK5nlDcV4RyUretc3ELW1pOtcVNowXJlNpKMI91SX5UdkvQf00oWVnHWNUpKpWqfjh3LdJ42Rp943bFteD4uTrPpHvLP2/Q31uXyU/e8B6PejNSdWlq3UEW8bqjNJo7CW1Cja28La2goU4LCS9jnXaoqnBdsVskShg8Z3XeNRueX4maftHpD0TQ7fi0dPLjjr6yoLCNoEhSNQ2ByKAMgIJE2KAgEmBnJCxAEIeR8AZ3IWACRE+QASAB8ijKNATYMmSABQkAZIsCAeRIkBEJAZyKYNFkDWQYCAIvIpEwIi5FIAZEwAmSJGgAkRZAmZZpggOOUcnrPqh0dYdbdJXmj3lOL+NTce7G/B7XhHG8qWxMTMTzCJiJ6S/mB6hdJ6h0H1VcaHq1GVG3qVZfcqkpZ7oRx+nKPBVIuOzX0P6MetnpfpHqF0/cW9aCpXbptQrRS747eGdCPUbozXPT7V6lhrlGSs3NqhcyblJxWMZwje6bUxlr+bWZ9PMTzD1mWxhsZuMoKdOXdB8M48mV5uWL5eGhMpiSdgyQ4yBEhFIyjaJhEojUYt8LIvsj+aeGTM8ERywDkUu1/leTim2udi3a3MKoh5TpHqCp0l1fYdTUoSmrTPfGPLzsf0n9MOqLPq7pS01C0rRqzdNSqpPeLxwz+YeIzi4zWYy5R9O+zx6tX/plrv3W4dSrpNzVdScIRzhvHO/BgZ8PxY6d2bhyxSOJf0ajjAo8N0h1JpXVOk0tR0u5p1O+Kc4ReXF+zPM+d+TVTHHdnRPMcw1k1FnHke7BSnlyZLKOPuzw8g/ieIk8I8zcmGTGKv8AuklU/wBwcI8zkQownjnY2miFUS0WQzksBJZkSYAWCwKAOzyT24FswwOGvClWj2V6SqL5o8Fq3RugapTnCtY0V3Llo9iSBxy+C/i1GTFPOO0wtXxUvHFo5dWfWL0ivNDrT1bQ4Tr0W8zprZJe6PkUGqkcrlcr2O/19bUryznaV4qUKi7dzqF64dHz6Z6mq1ramo2dTCyvdt5PUfCviK+t/wDi6ifnjtPu4vftqrg/vsUdJ7vnjRqnju3NSSxlcHFN4pza8I7eJmekOWiHvPovoL1/rOg6ke6hSm0/5Hce1pRtLalaU1iNNY2Ouv2UrOM5XNxJfiVXZ/wR2OazXkzyTxpq7Zdf8Ke1Yd/4dwRTTeeO8y5Yx3ybaBNYJHFy6NBvk1gMASJlwyYGTSBoUAgyyTAEiHBYAPmSHBATIORQEGSYAKJkhAEKIAElwDJAJAyyAomSJgSJhwQFkgIDTLBImwJEw3yIBkvJDgCLPzJmQNeAYogBCywTWwGSQskgISABQtbAh8gcSTUsnrPqB0RofWWl1bPUbak6k4tKo1uj2tpHDVjhZJrMxPMImImOJfzu9fPRrUvTe/q6lZKrcaO3KVWVSWezPCSxwfKk1KMZxeYyWUf1C9Q+mbLq3pS70u/pxnCVOTbks+D+Z/VOkXGgdWappNzSdNK8q/A9nTT2x/Bo3Glzzkjie8MDUYor1h43JpGWS4M6JYTZKLbwjKeX8vJ5XpHp/W+r9Sem9OW8K84NKpOWUln5oibRCa1m3Z47sUFmo+1HFK9tIT7KdT4lThRUW9zst0h9lG4vLanW1y5vITazKMarx/Q+4dAegXSvTFCm6kFcSS/838T/AFZjZNXirHdk000z3dN+h/SbrbrG4ounYK3saj3qQm1PH6H2Ky+yNCdBSudU1FVGt18Rf6HbrStN0zTacaVja0qSjw4rB+99z4eDAvr7z9LKpp6xDpH1F9k69s7aVXTL6/qzSylKosf0Ph/WfQvVnRkp/tuxhG3i8fEUpSePnsf1Kl3RW77keB6i6Z0TqC3lQv7Gi3JY7nHLFNZb9pNsET2fyyt5U68FOjLuXnY/Va2UtSuoadCHfKr/ACwdhvtBfZ1v9IvKuv8ASKlWU2nUpSm1BR33Sx9D1T016VVhbu6u6f8AtEvxNPw/ZGz03Gb6XP7zr6bZi89u/pD3f0S1HUfTm3hChUqVLao+6pSXvsdnejvUHSdfs++tONpU47ZvDZ1qp08vdZXsfqpxcJRnSl8OS3WC/n0GPL1npLgtH4w1elvPm+as+ku2tOvazgpwuVKL85PzX2raZZU3UrXsFjw2da6XVev0KapQvJ9qWODx2pavqOoP/a7iU0t0mYFdrnn5rdG+y+PKeT+6xT5vz7Pt+ueq+mWM5UqVu6z8OB6nf+rtxV7vgUasPbj/AFPluE3lrI4j4iZlNBhr6cuc1Pizcc8z8/lj2h9BXqrq/d+apj6f9z91l6tXkJp1aVWa/h/qfMlE5KcF5iXfweKf2WFHiLcKTzGWX3nQPVPT71xpV7d0peXM940/VtO1FR+63UJya4TOqsYLHCTPI6LrGpaTWU7G5lDffCMPNtdZ60nhvNu8d6jHMV1VfNHvHf8Aydp948mk8o+Z9Ceo1C8lGw1PNOeP72bWG/Y+kUZwqU1UpSUoPdM0+bBfDby3h6Ttu6abccUZNPbmP1hyvgGWTKeWWWyaQ58IGSQEy/gONiQAKwTDIHFVz3JrwfNvtAaFS1bpPv8Ahr4kPxN+dj6a0meL6qtad50/eUpLOKTwZ+36m2m1OPLX0mGJq8EZsNqT6w6H0lmn2NbxMVI/2VT6Hldas3p+u3VtPbDb/mz8NSCdKaXse/0vWeLR6vKZpaJ4ffPspY+6XK/9z/JHYB/3sjrr9lSq07qm/wD1f8kdipf3zPGfFscbpkei7BPOiq3E5FwZitiOXbwpl5FFsAMBZAQMQYAaQLkQEgRATZk1gAJGnwBADAWSAkL+RB5AkJIGwEPIogJERAAkIAWCeCACNEBkvIoGAkwQsAFAWQFkSICJGfJoBBgTAUXBIgJhuhS2LABuKLBAOTM1ks7i2BnsTpyi+GmjoN9tjSKWj+qGmTo01GNWjVlJpcvY79o6S/b6UX1lpr/e+BPH/wBTO2/rmiPux9TPFP69XXGUcfxMM/TOOy+h+S7zGlJRz3yTUUuW8G4mPRq69XnOgOlNS656npaHplNypqcVdzWzhCWd1+jP6Eej3pjonQHT1taUaEatxCCTnNZlx5Z83+xh6eWehdG0Oqa9B/e9RowdRTzs+35nYiCb3byzTarPNp8sNphxxWOXJGo87bL2NySmsMzGKORIwmQxGkom0sISYGJHE4LyjmeDLCH569KlWpSo3FNVaUtnGXB8g9W/T+EKX7U0eko9u9SK2SifZu3Jw39rG6sK1tJZVSODI0+e2C8Wq1m67di3DT2xZI+33dRaHCzsz9HasHk+rdNhpfUt3ZU1iFNrCPGNs6ylovWLe7wHU47Yctsdu9Z4lmcfmcM4nNLgxImYhbraXGlgmsCwZHCrnkpnNBnAjkTJhTaHPF5RpPHGxwqQ9xUt8TDlcsSUk+2SeU/mfTfS3r+dvXhpWq1cp7RqSfPsj5TUmcXxZRqRnGWJwfcn9DE1OGuavls220bjn27NGXFP3j0l3AjUjUpxqU2nCSzkkz5x6M9WftTTo2F3V7q8Fvnk+kJYeDmMuKcdprL3Xbdwx67T1zU7T+jceDS+plI0i0zywQkgBmTTMsDOXk4L1OdjcxxluBztAsNuL4ZMT5Z5Rx5nTL1P024XXFz201FNLGfqzwlHRrydTDVNZ+bPsHrPaU6HVkmoJd0lvg9WVKmpL8KN9k/4m59NEYMeGJ8vTmZbfS/8LtLq8ManJmmPP14j0ewfZzo1rDXa1vU7fxVcrD+SOyFRYqtnXH0ruI23WEE8Lum2dj21NQmvJpM2+5N5y21OSsVntxC3uPhzDsNq6fDaZrMc8y5V+UOGK4BltrSmGQyXkDWSJEAMkPIMBIkTABBlwA+AZCkAIS4ZMCDgs7iAZFIiWwEGBJAQbiQEiZZ2ICJk9gAhLBMCyREBIBDkCA0WAMikTQoCDyLIAZIWiAUgexZLAEiZYBgORBIt+AFgyF8AY4JspGWwORPZv2Oiv27LqN16oaNRjL8Kt6uV/wBJ3krVFC3qzfEYNnQT7Reo2vUXqSrhSUnaKpS/jlf6Gw22s/F83swNdqKYacW9XyJ9ux+/o2yWpdfdP2OO6NS+jGS+WGfpnYUZLZ7nvf2fOk46j6j210u6TtasKi+XJtsvHlmZajT6qs3iId7umdKpaN0/badRiowhBNJeNjzFFbB2/wBnD5RSOSksI5qZ56uliOFjc1nYWZaISclkEIAwxkcbikBnZC2ku57JchUeDx/UNZ0NBu6yeHGm2mVRHMxC1kv5KWt7Q69+p0oT63v5weU2j1p8nNqF5Uvb6pc1Xmc92z805fM7HFTyUivs+ddbn/EanJmjtaZn/NSZxN5JvIMqlYiEwIkglCiwATLaZdxnIE8o4E2fnqZ7spnNPcz2lFo5XaT5Xnug9XnpGu0asc9tScYP9Ts/ptwruyp3EXnMUdRacpU505x5hJSOy/pRfu+6WoObzLtWTTbph6ReHoXgbXTGW+mmek9Ye3xexpnFB74OTJpXpsTyiyHIBLRlo0hAw+DjWfiR+pzSWxw/+ZH6kSqo+E+v9Ps1SFf/ANxf1Pn8KuYp5Po/2i5JdmOfix/qfKqdR/BicZr541V4e2+HK/E2vFMvM9O3f3PqazrZwm3k7SaTUVfS7aqnlOOTqBcVpQiq8M91LdHZf0p1mOqdOQXfmVOCXJn7Lm4vbHPr1c/450Uzhx6iPTpL3TIeTjhLOxyxOlh5jMcJkkLRBCDkuRSAkQgBImSJ7gSAcE0BIsh5HwBAJNACRMQyAoh8B4Ai5IuAAhRMAQoEIEwwJAXBFkgEiyQAGCyIAmKYeSwBN7iRADJcCyAfAYEmwDGAyJJbgQD4BgKHKM5LIGtiZlMmBM4qmxts43u8EqZl+LWbmFtpFzUqSUV8OW/8D+cPV9z956w1itF5Svaq/wDsd2/X/qOGn9NVdKtq6jeVY/gSe+Dpd1H07eW1zVuKUXN1pupN+7ZtdFjtWk393L7puGntqYwTPWI/qHhYv5n3j7Fli7zrnV6lTLjTo03H9GfB1aajulQef+FnZf7EljWttW1GtcR7ak6EM/zMjUTPwbLOjvSNVSvMdZ4/SZdqmsRSKBcjE0LsCy5RMGAMkwJAaQoyjSA46vB636iVZ0+ma6i8d1N5PZKvB636jRcumLjC4psu4vrhgbhz+HycezrGpfhRTllHFGWyFyydhEvnya9IOSyCWWOAhI0uAFBEoPJoiUcshJiyKUwEsGlFMDVNoQSlHn6ZPu3oRXc9FjSzwj4XlLu+jPtnoHF/s5S8dprtx/6Muv8AB0z/AGjXj2fUIfmZys44/nZyM52XsdezLHwWC4IVFCzGcDGXuA52OFv8fc+FyanLc8T1VqtvpGjV7ivUUHKD7d/JRe0ViZn0XsOK2S8UrHMy+FevuoxuuoPucJZUZxl/M+fN9v4fY8hrd5U1fWa+oVW2pbRz8mz8Thvk4bNk+Lltk93v22aaNHpMeD/DHX7srDTi+Hye6+kPVctA1pWd1Uatq03Lub2XyPS+wnDuWzxJcNEY8lsV4vXvC7rNLi1mC2DLHS39cu4lvWp3FCN1QkpU6iymjmg8nX7019SLnRpx0/VZd1BvCqTktkfcNG1zS9UpxqWlzGbkuMnX6TW49RXmJ4n2eKbxsWp23JNbxzX0mOzyuQZibkvKa+RReUZvLRcNo0YFZJQeCwJJgDIcAAgQ4AA3EkgJEyZIALgSAEL5AkAoeQYMBZcgtyQDjBESAUgwPgMgSJh5FARDggMDyTJASHwXgGgHJeQQgTDO5EA8i+AJAQoi4AM7i+AJcgGMlwL2MuQRyJMw5GbmpSo0nVrzjGC53PS+pfUbR9K7qdtXhVqR5i2XceK2T6YYWs3DBo6+bNeIe7NSe+YpfU9W616y03pyxqP40Z3Xa+2Da3PlGv8AqnqV65wt4fCT4akejanqF3qVb4t5WnVl47nk2WDbZmYnJP7nEbn42pFJpo46z6z6LqXV7rXNTqXt1Nybk+yLecI8W6MJfngpfVH6Y0/ODXw/kbqKRHSHnWTU2vabWnmZ9X4XZWq3+FD9D6B6Gapb6R1PUg3GHx1GEVxl7npkobcG9NrVLHUKN3S/NSmpfXBby4vPSae7L2/X20uopnifpn/3+juF3/l+aybjJHpvQHVdl1BpNHurQjeKKU4d3Gx7ZFuOzefoctkxzSfLPd7ppNXj1WOMuOeYlztoGYTNZ2LbLKLAI0gBIcjgzIDNTdnieq6Px+m76GMv4TweVOOrCNaLoz/LPZlVZ4nlZzY/PSa+8OnlaE6NxKlOLjJcprBqO57R6paW9P6vu+2m40ZSXa8bM9Yp/mOuxX89Yt7vn3V6ecGa2Gf2ZmG0sDg2o7ZJLBe4YPLCI3LgwBEWTLZCYgszncsgFXCbyzUXhGUshJ4IlMRz0M5Pt25bwdhfQ+1dHpmjUaw5RyfAdLoSutRtreMXJyqxTSXzO03R9hHTdAo0EsNRRqd0vEY4r7u78DaWb6q2X0rHDy1Pls5eTjiciNFL1aI4gsyzTMvchLEjGW20mljnJqq4whKc5KMYrLbPj/qr6pUtP79L0Zxr3OMYUsNLOMmPqdTj09PNeWz2vatTuWaMWCvM/pH3e99T9aaL0/Rm7i5gqqX5Wz4b111tedVXDpwbp2qeV2y2Z6Zc3F7qFxK41K6q1ZSee2TykctOSSwkkvkcvqdxy6np2r7PWNp8LaXbOMk/Nk9/SPs/R2xUe2K2RxuJpS2LwYEughxuIYwcjB8EKmJqEo9skvrg/Rp+q6xpslKxvayiv3e7CPzSZlt+5MTMdYRNK3jy2jmPzfQul/VrUtPqRp6jS7o53lKaZ9i6V6y0jqClH4FzD4rXCZ1aST2cU/qfr0+reWFaNfT7mrSmt+2LwmbHTbnmw9LT5oczuvhPRayJtijyW/Ls7fLbymvkbUljY+Pem/qcq04adrTjSnwm5ZyfXKNSnUpxrUpKUJLKaOl02qx6ivmpLyzc9q1G3Zfh54+0+kucuDMZZFmS1nZNgmXJMByXIb5FAOA4IuQLJEQE3sHkQAkixuKLYCRMmDARyjA7gLIBAkwYgwBCSECyQ4IDLDgRYEQDjYARcscEwA0g4LIERZICRMUwe4EiZIy228BEys5eDw3VHUNhoFnKtc1oqeMpZODrbqa06b0ypWqTj8btfZFvk689S65fa/ezururJQbzGmpZSNho9FOf5rfS5LxF4mx7ZX4WPrkn9Pu8v1p19qmt1507acqNFPCcZco9Nn3VJudWcpzfLlucuF7IJRR0FMFaRxWOjyPV6/Nq8k3zW5mXA4JlGnh5OXtIuRSIYk3lKJOKEmypSzKO2xw1Fjc5m/Y46m6ImFdJ4ly6Vql7pdzGvZ1pwknlpSwmfZPT31PpXnZYaq40pZUYvuz3HxCUTjTnGopQk4ST2cdjCz6amWOLQ3u1bvqdBfzYbdPWPSXcehUp1aUatGSlTlw08nMj4f6Sde1barS0rU6jcHiNObec/U+30pwqU1UptODWU0aDU6e2C3EvXtm3fDueH4mPvHePaWzSMoWYzcnyDJE9wONmGt9uTkkcbCOHz71l6XlrGkwu7SKVS3/HPbd7M+CRpNbNYa5R27nCNWlKlUinTkvxI+G+qvRVxpl/PVLGm529V5lCMc4+Zutu1URHwrfueaeM9ivM/jcEc/4o/i+eJfhMtYOXKlHKx9Djm99zdxLzKGJcGGzUmjjmxK5EByAzkiFyILYx8GTS5QiSXJFZeBdJcsofoec6S0C86h1OnbW9OSoKSc5OOzWdy3lyVpXmVzT6fJnyRTHHMy9n9F+m6t9qj1CtS/sUl2tryj712qKjCPCWDx/TOjWuh6VStLaCj2pZPKKJzGqz/Gvz6PcNh2n+zdJGOfqnrLMTkRnCQmM3rTZxd27zslyLe56v6jdSUentCqVnNKpNduM77lvLkjHWbW7QydLpr6nLXFjjmbPTPWjr5WFGWj6XNTu5cpSxtnDZ8OjSlCUqlacq1abblKby93k/fXq1b27q391JzqTk8OTzhZOCazuzjdVqLajJ57fue5bNtuLa9PGHH39Z95/2fmUdzcdilsRjNvM8uRS8Gk/c4lg0mQomG2wzsZyTCOBJmfJp8iiUiPJ+mHHJwI5ItkKbdXO4qeMNwmuJR5PpfpR6gVbW5ho+rVPwv8s5Sy2snzBSwZq900p05OFWLTjKOz2L2DUXwXi9P/bW6/bsOvwzhzR09J9pdvadSMqcalOScJLKaOaLyj5T6KdZ/tOzWlX80rmOyTlnZM+px2ePHg7LTaiufHF6vFdz27Lt+otgyd4/WHIRR4FmQ1wXJFkgDyPgPmQCRByBJ7iyIALJEkBZyOMk0QEwQkBEDZZA0DAQJEyRcgRFggJgiZIBSLgs7A2BrwAIWBEDLgBYZHlAwLJIBQE3g/Jqt9Q02wq3lxJRhBNs/U45kfJfXbqCpRtYaZbzWKycZ4fGxkafD8bJFYavdtwrt+lvnt6dvu+d9edR1uodbqVHUzbUp/2aT5PAJt88H54vGF5S3OZSydTSkUiK17Q8I1mpyajLbJknmbdXJnYyGRL3LCiF5AuCZCQ3hGW2ye4MJiFncJFgcFKpxdvyL4efBypG4x3J4T55hih3xknCTjKP5Wnvk+8ejfVMr+wWl3k/7ShFJOUt5bHxCKS3weU6e1Kel6za3cJyjCE8zw+UYur00Zccx6tvsW8ZNv1lckfTPS32/l3dpVsa5PHaFqFPVdIoX1NpxqRTWDyEODlZiYniXvGPJXJWLV7T1LIQZC4yzOEaYICxscN5bUbu2nb3MFOnNYeUfoRSWUTE8KbVi0cS+Idf+nNayuJ3ulQzSe/w4rJ8xvoVqFV07ijUpzT/AHo4O3XYsNSipJ+6PVep+htG1qnUl93iq74ljhm2025TWPLk/wA3n28eCq5bzm0c8TPp6fudZm/mjjlM+ldR+k+o2cnO1rRnF8RUcnp1/wBI69bScXZ1pL3UDZ11WO/02cNqNn1mmtxlxzH6/wCjwXxEbi8o/b/4f1rOPuVb/oPIaf0prtzJRVnWin5cC58WvrLG/CZbdK0nn7S8L2vART+Ioxi5N8KO59D0r0v1a6lFVKipp85h/wBz6F0x6YaVp6hUv6UK1SO+ceTGza7DT15bjb/DO46u3E08se8vlfRfQ+q9QXMPiU5UKCabc44yvJ9+6U6c0/p+xhb2tKKklu8eTyVpb0LWkqVtTjGK22RzxWDTarWXz9O0PStk8Oaba480fNf3/wBi0KJEzDdGJcGM4NHHU2CYhTqKMJ1HxBdx1t9Yuopa11M7WhUbt4LdZ2ymfcOv9V/Y/TFW7Tw5JxOq0K87i+uLmbbc6sufqc/vWoniuKPXu9G8CbZFrX1lo+npH3fu7ljC4MTMRkOTQTL0WI4Yktwwba8g0Qucs4ITLAUIJ4FASRrBIQhJGs4Mp4LIRLWfcu7DAOSVL9miajV0bW6F9Qk4rMYy3xs2dpumdTo6rpFG6pS7sRSf1OptSPfT7fOcn2r7P+tSraf+zKk8yTb3fzNts+ommX4c9pcZ4026M+kjU1j5qd/s+upicUfzNfM5lwdRDyeY4ZYomiJQGSNfMGAZFBjYgHJMHyKWwFyPgB8ABAWQISSHAGcEjWAYFkmwICFAkKAiHBAZJImGQNMMCTYEiYZFABC0QATF4wD4AkT2JGajwhCJ7M3FVUradTOMI6v9fX9bUOqb11KjlClUxFZ42Ow/XF3Kx6buq0XhqDf8jq7dXE7m8r15/mqSyzd7Tj+q7zfx7q+mPTx37/wcSjuIpEbrs8zmeSpGjAtkqeGnwQJ7ZYgYfIMXyAVJcEiEg5S5RywONI2mIUy5VwawnFo41IpTwSo4ntD7n6I6u7vTJafJ7W0VFZ+h9I4Ov3ozqv3XXZW/dj40sYPv8pfi/gcvuGLyZp47S9w8I62dTttYtPM16T/D9G8kYyOTBdUcFjBJjkCQkyQGZIw47G2D4COHHutsJ/U4q1GjVWKtGD/5TnwRPPCmac9Jfj/Z2n5z8CP/AEnPRo29LalSiv8AlOZIe0nzTKiuGtesRAj8oxX8B7cikPBSuxAUcGgyy4QOCDIgkZ2OOqstfNnIuAksuP1BHSXyP7RGpO36cnZRlhtpr9T4Papxor5ts+t/aQm3eKnnZpf1R8pjHCSON3O821Vvye4+EsVcW004/amZcsPY5DjgtjeTB5b6S8YBlkABhg0QSyKEghCiAIaIEIQhxgEaXADHk9r9HtRnp3ViipYUo8fxPVDyHSVZ0OqreSeM9q/mXsN/Jlrb2lh6/DGfS5Mc+sS7YU33KnP/AHo5OVM/PaPNrQl701/Q/QdzDwC8cTwshnYcA+CVJIyuTQEmLMo0wMjkGAC2SewFgB5LAgwEvAI14AMkyIANeASIAYokXkCyQkBkQFAQM0WABIB2DICyIAEORJASMVTaOOqTHdTbs9V9Vqnw+j7z/wCJ/wBDrPHlP3Oy/qvBz6PvMf8ApP8Aodaox/L8jfbX/wBKfu8p8cf/AHac/wCH+LkS2MNYZy4/Dk45G3cB6skRNkKuFkW2zIoHBSyPb8wjzsawSgKI4Jl4CEhTApcAOcHFWm8CzhrvbYptK5jjmz2H03quPWNgs81f8mdo/C+iOq/psnLrHTsf+t/kztR4j9DQ7r9dfs9U8C9NNl/8v4Q1E0EUawal30dlgVsSHYJTZETAywYtgBYQYEUARRrA42LcC4DyPkGA5DKAGBoeTKJAIPlCZk8NfUJfA/tE5etU4+O1f1R80lDB9b+0JaJ1lde2F/M+VY7opnF7hXjU35e3+GskW2vFx6ODAo3JGGYTfRPKYERKULAVuBIiZLgC8gOACCiyZYoDSGICmgcNM59Cf/5Laf8AHH+pwM8l0ZbfeuqqEcflw/5ldYmbRH5rGotFMN7T7S7U2efuNt/8a/ofoRxWqxa0I+0F/Q5kjvK9nz3k+qWshyG4pkqFgmyfAAPBESAiBkAsBDcBIgyAhkMiwJkiLHsAg0JACFEhQAREBk0gLIDksh5IBDBCgIDQMA5HAI0AHHU3OQy0ETHMPB9cWzu+mbqlFZbg1/I6v1KM6F3Wo1FiUJYaO3NekqttOm1lNHWPrywq6f1Red9NxhUqZj89jdbTk6zR5r4+0nEY9RH2/i8G9onFJmpTW6ONm75eaREpgRBUhRJEEFPBpPJgieUNvkmzIAabYNtgSHKeBPg4JnPJbHFJPDKJXKe73T0d0+V11HCvGLfwZ5OyCW6+h8p9AdHlb2tW+qxyq6Uo7fI+tJb5Oc3HL5s3Hs9m8I6P4G3xaY4m3X+v3GK2NYBF5Ne6s7EwYgWQBsAJgIJAaSIlt5HMfcIWdiyWY+6LMfcHJyEi+gPIB5IM7lyEtIcmfBAa5OOo8NfI2jM1lkSmvd859c9L+99NyuYLMk0fBqH4qWPKbR2r6o06GpaJWt5LOItnVy8tp2OqXFrUi44nJrPtk5jeMPlzRf3ep+CtZGTSXwTPWs8/ul+aaOKS3OWbOOXJqHcVZLBpIsbkKuWcEhfIYAGO5cFkBDyXIgZJiTADSMcCmE8OWPO57r6J6XK/6m+O1+BR5+jPQ68+yksPdySX8T796D6J9y6fjeVY9tRt8/Mz9uw/F1Ffy6ue8Ta2NHt159bdIfSY4j2xX7qwcqOOK/E2cqOwh4lYNBjc0BKEGBQNgSYoORAifAJj4ABWAfJeAEMEPgAwWBQgBcCDAGSAcgJZIsYASDJAHJeRBgIMvBIBS2AUWAIiYYASJEAMs7CwaAznDPlHrn0/Otax1SgsKgnKW3Ox9Xkfl1ayo6lYVbOvFSjNYaZf0+acOSLw1W77fXX6W+C3r2+7qGnLKfucvg9h676er6BrlWlUo9lvVnmk/GDwahh/LwdTjvFqxaPV4Rq8N8GScWSOJr0cST9hw/Y5e0GsF5ieZxEaksMyxKYTYA+NhIVHJAKCEKRJMVsEcjGdj9uh6bPUtVtrKGf7Wfa2vB+WHPu/B9n9FulZUKb1a9p/3qUqaa4MTVZ4xUmW42Xbb7hq64K9u8/b+fZ9A6U0qGjaFbWUVvTio5/geYhwWzHg5e1ptMzL3jDhrhpGOnaI4RZDJmTKV5yZMNgmzirVadNZlNE8TPZHMR3cuTMpxjvKSR4u71aEE1SWX8jxVe7uKzz3tL2MnHpbW6z0a/NuGOk8V6y89calQpbJps/DV1ib2hFniUsv8W7Nx2MuumpX82uvrs156Tw/bLULiW6lgFeXL/fPy5HJV8Ovso+Lf1tL9X3y4/3wd9cr98/NkG2x5K+yPi3j1l+yGp14cts/RR1nLxOLPEvPANZ8CcFLd4RGrzV7S9noXlGsliSTP0pZWzyenwcoPMJdrP22ep1qLSm3JGLk0nHWsthg3Pnpkh7GR+S21CjWSy0mfqTT3i8mJak17tnTJW8c1kocGTcSlccc8NuLWVLZnwv1x6bnZ3z1e2ptUnhPH1Pu0lueL6k0ujrOl1LOvFSXa+3PuYWu034jFNfX0brY90tturrlj6e0/Z1Rk1JdyOPG55XqvRLrprWqlncxl8CTbjOXu3weNlHD+XucdatqzxbvD2/FlplpGTHPNZ7SETJ7B3EK00D2NZyZawQlhssi0AVlMcmDcAiYKWSwaX0NxiFPLi7TONz9DhnYxG3r3VzCys4fErTa2T4WQRaI6y/f0TodfqTqSjbU4N0abUm1w2mdqNJs6Vhp9G1pRUUopP6nqHpR0hS6d0iFWrHNzJZ7nzue9RWd/c6zbNJ8DH5rfVLyDxZvUbhqfh45+SnSPz/NpI1wCJm0cimGSeQARIeQMomLwDAkWSRARMQAQEGAkCFcADJEywAgxDAEhImBERARIlwIFsDJkgIsk0ACREA+DIgAh5EMAZlyZez2Nsu0D1/rXpu06l0qpb1oRVbtahUxvH6HXnqLQ73QdRlZ3lKUY5apzf7yXk7StY3R4fqfp+w6hsZ0LqlFVWmo1Mbx+hn6PWThnifpcj4k8NU3SnxMXTLH6/lLq/xxuZxlHuPWXQGqaLKda2hUr2scuU2+D0xyx+ZYZ0WPLXJHmrPMPINZoc+iv8PPXif67CSMMpSy9ixkuRPKx5ZjqGgNNM46jBHWTlG4tH5pSfgozae7I5V/DmYfrz8yXz59hsqFe8rwoW9NzqTeIpeT6n0B6ZV6tele6x3U1B93w3hqXyLObPTFHN5Z23bTqdwyfDwV5959IeN9K+irnVb2Go3tOVO1g1KnniZ93t6NOhQjQoxUKcVhJGba3o2lCNvbUlSpRW0UtjmRzeq1Ns9+Z7PZtj2TDtWDyU62nvPv/JqKwaycc6kYR7pPCPx1tVoQT7WmyxWlrdobi+WmP6p4ful7t4Py3F3Rop90keGu9UrVW4wzFH4anfPepLuMvHpJ/alrc25RHTHDyd1q8vy0k/qeOqVq1Z5nN49jjSxwaRmVx0p2hrMmfJln5pCil4I0WCrlb4CQkWQqg7iiQN+CE8l8BuSHIJkZZciDJUhoYgIRBWzzHZn6aF9XotZk5I/MiKJrFu6ut7U61nh5y11SnPCqfhfzPIUqsJrMZJnqEl5xubo3Vei/wzePYx76SJ61Z+HcrV6ZI5e3t7GHHyeEs9Zfco1YtfNnnKU41aalB5TMLJhtj+ptNPq8eb6Jet9cdK2XU2mzp1YRVdLKnjc659T6NfdN307a/pyVHP4akn8+DthJY3R4TqjpzT+obOVC6pQ72tptGn1+3xqI81elnaeHvEl9un4eXrjn9Ps6qTae8XlGO5HuHW3pxrOgVpzsIVLq2Tz3Slxueiu4jGq6VVKE1ymcrlpfDby5I4l67otTg1uP4mC3mj+u8P2wZvwfnpTT4lk/THdFHK9aOGWtjjktz9PYYlD5FUKYs4DSKcWvBxNtcvBEq46v0QZzQ4PHu5pw5mmew9NdNazr9aMba3kqD5mnwTSJvby16ys6i9MFPPknyx7y/FbU613cxtLOn8avLwmfbPSz0/p6VTjqOor4lw90pLdHmeg+gdP6eto1asVXuGs90luj3SO+FjZcI6TQbZ8OYyZe/t7PMPEPiqdTE6fSdKes+s/yUY5xjZLhG0sDFYJm7cLM8rlEGcCEJhgWQB5NIGi8AT5DBZLPyAuBREBAJAQDkgASIAEiABRkUBp8AQIDWCLJAACyQEHkXyQETHGwAWCJggJikRcAKLAZEAJFgsATWTMlg34DkImHFWpU7ijKlXgqkJcxZ6Z1X6daTrD7qTVq0uIbZPeODjlHcuY8tsc81nhh6zQ6fWU8mekWh8C1n0r1a3m/uEZ1knzJ42/Q9eu+jeoLRtVbRrHzOzyc0/zHHVo29X+8oxn9TPpueSvSYcnqPA2hyTM0tNf9HVGvpt/ReKlvJM/P+zr6q8QoS/Q7Wy0rS5P8VhSf8A/ZOlJ7adS/6S//AGr/ANrWf8g8W5jN0+zrDp3R+vX80qFo2n8z3Tp30mvbiS/abnbr/C1/ofcaFpa0f7m2jTfyRzPvfMtixfc8k9K9G10vgnRY5i2WZt+Xo9a6Y6M0jQ6MIxpQrzjxKS3PZt8JLj2MrCNx38GvvkteebTzLrtPpcWnpFMVeIOFgJYjFyk8JBVrU6MczkkeD1PUZV26dJ4j7lWPFbJPQz6imGOvdx6teyrVHTpvEV59zxyS9tzeAZtaVikcQ5/Le2S3msVwRLgkVLa2IiRCWlsDZJkEM43FIcFwErgQbFbgWcE+DLIC8jyZYpkoTFA2KeBISyD3QPYjhKZlmjLJUTAcU1ujyei3zozVKo/w+DxpP+ZTekXrxKrFknFfz1e5pxnHuTymZa9j17TdUnQap1XmPuzz9CtTrx7oSTNXlw2xz1dHp9XTNHTv7MXFKFam6demqsH4aPTOqPTjRNajJwhC1k/MVhnvWDjlFN8GJlw0yxxeOW20euz6S/nw3msuu+uej+p2lST0ydavHxmR65c9G9U2L/trJ4X+L/sdqczWylscc6FCttWoRn9TU5Nkw2+iZh12n8d66kcZaxb/AFdU/wBlavBfis3n6l+zNVlsrN/qdqHpWmvmxpP+BLSdMXFjS/Qs/wBh/wDezP8AnyP/AMf1dWYdNdQXL7aVk3n/ABHl9M9LOo76S+9UalGD8xkdk6dhZU3mFtCP0R+lpqOIbIu02THH12mWNm8e6qY4w0ir5N0j6Qadp0o17u4nWkuY1Hk+l6bp9lp9JU7O2hSx5ij9Ti/3t2SWDZ4NLiwRxSvDldw3bV6+3mz3mW45fJtJHHE2jJa2Za/gGRyZCF5EFyIA2KDBATISAELBE2AonwCHwBIHyWSAiyIARISAiZEADgz5NARAyQFn5EOCAGKYZIBfuSLwQCBAwLGSYg2AomCFgCNIBQB5EPIsAIiyBZ2Mt7GmYltywhmTwZUnk/Pc3lGknmSyfherRUsJZRdrhvbrELF9Vhp0tPV5dSNJ5PDfteHshWsRX7pV+Hyey3+N0/u82kEkvLPCy1mTX4YH5q2oXFT3iVRpbz3UW3DFHbq81Wr0aW8po8fdaso5VJZPFTlOb/FNsxhGTTS0r1nqwsu4ZLxxXpDmq16taWZzePYx9DPA5MmIiOzB83PWVgGxTJoKeWcigwW4QcigIJQplyDCGifBnIoCXBMQYEgZEyRBwIMBFoCAvBfMuSIEzJoGTCJAMSJQy0nzuc1rcV7aWYSbj7HGS2ExExxKI5ieYniXnrPV4TSjVxF/M8jTq06izGSPUML239zkp1q1P8lR49jDvpKz9PRssW5XrHF45e1yWfmUUz16lqleCw4tnPHWZLmBYnS3hnV3HFPfo87hsu1niIa0mvym1rEX+6W502SPRejXYZ9XlMPyMfmfjt9Ro1HhtJn7IyjJZi8lu1Zr3X6ZK3jmsqWGjGDkMMpVJGkCRpBIYoGhQA0BoAI0jIgWCIGAgyQtAQMi8gCNICASLJABZIkAkyIDLIRAEKFEwDchIjkZaJjgiRF4JEwAQ5ICZISAiIgIUGBQEwJkBGc4FnitYvHT/sqb3ZXjpN7cQs5stcVfNL9F5qFKgmu7L9jw9zqVaq2oppe5+SWZPMn3P5lj2Nlj09afm0efWZMnSOkCXdJ5nLuM4XscgF/lhTXljC9iwvY00WCeTyhYNox52EpVx0LYZLBYCZT4DYXwZbJUnJZBCBciGCzggJET2AQIgHBEmQCDJsAJExwDJAy+g4ICSIUAERNhkBDkskgLBESJQBwKRMgiBgsCWAcAy0vY00Z+pKGlj2NrHsjj8mk8ETCazw5M442fuc9C8r0XtJyXsfl7h7iiaRPSVyMlqzzWeHnbTVac8RqYizyNOcKizFpnqKxz5P021zVoPMZOS9jFyaWJ61bHBuNo6Xjl7OSZ+Kxv4V0oyeJH7TCtWazxLbUvW8c1LAUBSrSLYshkCLkuRAiYMkBI0wLIERF4AgaEgBcj4AQAkSEAbLfJDgAYoBAclkAzuBrJARHAskCQkizguSICwDLJAQeTQNAKIEPKAs4IsAwEjJpAB6/rdGcLhVMZiewnFXowrQcJrku4cnw7csbU4PjU8r1PwR5K80upBuVLeJ46SnCXbKODaUvW/ZoMuG+KfmgL2ElgXwVKOWCwaLYckso0sB5Jg4LwZYpgxCBnYMbiRKAhEGAkGGKIE/kD4NPkyBIQRrAAhZYIAFMmGCRExABRMvAECRPggZIiySFcBASJ8FuW4EhBcmkAImL5BEJSQ8FnAMkDYC0SJUysFuRAREKQTwom1wYHJEwmJ4ctKbhUUovDPZrSp8S3TfOD1/TrSrc1U2sRR7HSgqdNQXgwNVavSPVuNupfraezaJkkRhNqOANAArdAxDkAJDgcASRMmSAgZMsgSHIImtwJkuRRNASIEIEiyWCaAGKBD8wFgWRQFsRbEBnIhgQDJEyQFgUWxAREPAA0SIgHIMBQES9gYrgCYEyQE+PkcFxaUa6xKKX0P0EVRaY6wotSLRxMPA3ek1IZlS3R4+cJ05ds4tHtv1OKvbUq0cSil80jKx6uY6Wa/Lt1bdadHqpYPLXekyjl0d18zxlWnOnLtnFoy6ZK37S1uTBfF9UOPbwDY4JouQsyPANlgCeFJ8FuQokSIdhwQMl9CwS2ISiIggosl4ADT4B8F4IAFAyJDkGRARED5AcguQFASLICggiwIJQoC8gQ7AG4EyJgEcoiHBKkEhKKbeIpv+AS0ie/CZ+200yvW/FJYieWtNNoUcN7v5mPk1FKMzDosuX04h4S3sbiv+WO3zPK2mk04JSqN93seTUVH8qS+hGHfU3t26Nph0GLH1nrLMIRgsQil9DZLBMxmdEcDO4gISGy3IQIzhmiAFk0g2LIE+SRBuAvAYJkuQFYJ4BlkCLICgJISRAQNiAFwJAgJlkQaAskWCAURBkB8ARMCbEEPAETEGBIskQEXAoGgIvBLkWBlosCSACwJARMiQEjir0KVaOJxX6HKyJieOyJiJjiXhrvScZdDf6niq9GpSl2yi/0Pbjiq0aVVds4r9DKx6q1fq6tdm2+lutOkvUcgecvNHTTdDn5nia1vVoyxOL29kZtM1L9parLpsmL6ocSQihLnKyFyPgmDZCrgoGWSYRIRozkieENA8AJAQbIGBEwXBIkKF8FgGBERIgQI0zPkkOCwKDIETYNkDlZIGyRKDksgKICZ8i2bo0alaXbCL/QTPHdPEz0hx5N0oTqS7Yxf6HlbPRm8Sr/AMjytG1o0YpQin9UY2TVVr0jqzcO3ZL9b9IeHtdJqVMSq7L5HlbayoUF+GKb+aP0ojCyZ737tth0mPF2hbJYSx9CFEWWTwkg8iQSsbAmIMBDBZFMCxsDFsOQFAxwDAgZpIgBGmZ4EAZFkfAEGCQsAySFIgIMEK9gIiYICFEiYAyQkBYIiAiDgkAomiTECRMs7gwHIMMiAZEPIoALImQNBkkQCSRCBliOCfAGRYPkmAoiBgJBuSAWYqUoVIuMoo2RPPCJiJ7vE3ekRbcqOz+Z4u4t6tGWJxf8Ee1GakIVItSimn8jIpqbV6T1YObQY79a9Jeok0ebu9JhPLo7P5nibi1r0JNTi39EZuPNW/aWqzabJi7w4MEWfcGy8xuU+RQCSHBIojuQBgIAGBReCWALJLccFwyEwsE0OQfzAGRETCEwyXJMkQeRBhTIEN3wmz9NrY3Fw/wxwvmiLWiscyUra88Vjl+f6HPbWtavLEItfVHmbPSaVPEqu8jyUIRhFKMUkjEyauI6VbPDttp65J4eJtNHisSr8/I8pSo06UcQiv0NikYV8trz1ltcWnx4o+WEW7LYsltfQeSZIByDEMAKJhkQIGOAeAJDsCLyAtBwPgAFAxICRMiAyIggIkxDyAhuQpACFk0DAPIokTAckCJgQhksgPgBRAGCHYgAQQgREQEWCIAwKAUBETJAAeTTMsBXI+ASIC8jkOSaAcl4BIgEmCyLAyK5JIcbgXgGh8EBFyTRAOAZInyAGZwjNNSimjQ4CJh4u80mlUTdJYkeIubKvQeJRbXyR7WEoxksSSZk49Tavfqws2gx5OsdJenY/gOD2G60ujV3gsSPFXNhXoPddy+RmU1FbtXl0eTF6cw/JgMm3ts1j6mWXWN2ZYoTLZUpOQIciQlgGaRCRgJciwkDkEWSJU8rBYGMZSeIpv6H7rTTK1ZJywo/MpteK9ZlcpjvkniscvH7vZJv6H6rXTri4aaXavmebttOt6OHjMj9qSXCS+hiZNZ6UbHDtnrkl4+00uhRSlJZmfvjFR2SSEUjDte155mW0x4qY44rHAHAhkoXUWSaMsBbJAaQE0BomBICyAAyRrAAOQwKRMCSASa2AkyMsgFETJAKBsixkANIGKAmGBwGQDyaMkgNERlgaYIMF5A1sRABck0KRMAQljBARCQBguCTIC5Is7BkC5LAeTQFghyDAgEAIcEiAkDLcvIFwJIsAREwASLJAXA5AkAEIYA0GCLIEmTAQJMgFASIUD5AgaT2aTJ5JZCJfjutOo1k5JYkeIu9Or0ctfiXyPZAaT5Rfx570YmbR48nXjiXp8lKP5otfUFue017K3rbzhufhq6PF5dNpGXXVUnv0a2+3Zaz8vV4UcHkZ6TXjxJM45abcLz/ACLkZqT6rM6bLHer8Zlv2P1vT7kVptyyfiU91HwMns/C2WTydPR60nvJH66Gj0o/3qyROox19VddFmv6cPBRhObxGDZ++z0utVw57R9meco2tCj+SBzfQxsmrmelWfh2ysdck8vy2thQoJOMdz9S+iQkYdrTaeZbKtK0jiscIsEXJCtYDJpmQEcgACyD6kuQHBIsgmBpmWOSQAPgg3AmxzsHJIBT3Jh5ECRBuKAsEIMASJigYAuTSYYZAPICDASAgEGSFABYFkAYLAogASBsCyKZkfAC2CIQLJBkgJIcEhbAGGBJAGCRPnBJAJblwWQIkRATAWZARBIQLIoET2AgHIAJYJMsgTLwRYAPIoiyBeSJCAEIPkAwRDkCEBXAAyEywFFgEaQABrYmEcBC8AWAlERABYLhjkAYGsBgBTL6EQA2KDAgLAskBZIMCgBkINgBCTAkJIgICIBQtAhAyJMGAiZECyRABITO5IDXgiyQEzLNoGBAyBgKFghAiJEwDIhgQBlgSQBghYeQHYiIAwRogAMiDASIgIuCRAQMQ5AkLBCBYIgASYMQAmJASJkXgAFgWQJMUzI5AWD5JMcABZHANAPggEAaJIeRWwEgZZJgSLAYFAWCyTBgPJfIkQERImBEDJe4DjYEPgGAtkmDLIE2SBigLIk0SAiIt8ASJghe4EDFEwDJZDyaQEDH6AwJCCYtgGSTA1jYCbAmSAeAYkBL5kBZAQZciBlGiICZFyWADJeRDyAkRARAIEiYeRAMkmWCwBZFIEOQLgizsACQkAIGSIBDyAoBHYGiAiIQAh8ABEiDO4C0HkUDAQREA52AhAgNLAMALAkADkGAGskG5LICA+CAVwGR8GWBMkRYAdiLBASJlkmAeRDAgRZIgJohMsCyJlGkgJoMCyyAMkTADQcEiYCWQwXAC0G45DICRIPIFgVsWdiAiLYADyLA0gIs7EyACLyOABMhwDAi5IUBJAxZABC+AxuBI0CRZAi2LIcgIbigYEuRBIgEjI7gJMBAyKyWBQEQvgALBFn5kBESICAWyAgYh5A0mQEBYAclgCDAlwAExIDJohwAETBAIoETAsFgiAGSEgLBYJkgAhwSAiJggHGCIsAIESAsYImHDASJFjAE0GRyZAciGC4AcEWdgYCDQomBkUXkQIgQgINEQGRFggJkmIYAcESJgGSRCBJEyyTAkTJbEwITORAcgRABIlyIA0KIGBp8GfIkAZEAyA4FIkTAQJCAImiYAXkQJMDSBkiYBkUSRALMtkyQARogBiCICZIsCkBMiICRMPJZASbJAwIXwAgAkGQIckQFyHkUDAQQggFkyIA8iiIAewoiQCwJsAElwQZAsiRAQNiWABEx4IATHwWCAGA8jgARMiAEaDBcAWCEAEGIMCQsETAXwBF5A14IBYAKAfAAwbEsfIAQCwAURIcADYGsfIgBIeCLkC8i+AIAZJjgsfICTBigYCmTMigLksCQB5EiAhAsgTYcsuRSAPAI0zK5A0QZIByDEsAZXJoiQEQ7EB//2Q==" alt="">
       <div>
         <div class="footer-name">DiscourseMap</div>
-        <div class="footer-team">Bongseo Park · Guiyoung Jeon · Jiin Hur · Yves Hong<br>IP Project · Teachers College, Columbia University</div>
+        <div class="footer-team">DiscourseMap · Teachers College, Columbia University</div>
       </div>
     </div>
     <div class="footer-links">
-      <a href="https://haetalkim.github.io/discourse-map/" target="_blank" class="footer-link">Live Prototype ↗</a>
-      <a href="https://haetalkim.github.io/id-portfolio/" target="_blank" class="footer-link">ID Portfolio ↗</a>
+      <a href="#implementation-kit" class="footer-link">Implementation Kit</a>
+      <a href="#faq" class="footer-link">FAQ</a>
     </div>
   </div>
 </footer>
 
 <script>
+
+// FAQ accordion
+(function () {
+  document.querySelectorAll('.faq-q').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var item = btn.closest('.faq-item');
+      if (!item) return;
+      var open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function (i) { i.classList.remove('open'); });
+      if (!open) item.classList.add('open');
+    });
+  });
+  document.querySelectorAll('.kit-card, .faq-expert .btn').forEach(function (el) {
+    el.addEventListener('click', function (e) { e.preventDefault(); });
+  });
+})();
+
 // Hook carousel
 const hookImgs = document.querySelectorAll('.hook-img');
 let hookIdx = 0;
@@ -885,9 +1010,9 @@ function switchTab(id, btn) {
   }
 }
 
-// Canvas install mock — simulate install buffer, then reveal DiscourseMap view
+// LMS install mock — simulate install buffer, then reveal DiscourseMap view
 (function () {
-  const root = document.querySelector('.canvas-mock');
+  const root = document.querySelector('.lms-mock');
   const btn = document.getElementById('cm-install-btn');
   if (!root || !btn) return;
   const dmToggle = document.getElementById('cm-dm-toggle');
