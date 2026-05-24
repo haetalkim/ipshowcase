@@ -19,7 +19,7 @@
   b.href = location.origin + path;
 })();
 </script>
-<title>DiscourseMap — An LMS Plugin</title>
+<title>DiscourseMap — A Canvas Plugin</title>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -65,6 +65,20 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 .btn-primary:hover{opacity:.88;}
 .btn-ghost{background:transparent;color:var(--navy);border-color:var(--border);}
 .btn-ghost:hover{border-color:var(--navy);}
+.hero-paper{margin-top:28px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;}
+.hero-paper-label{font-size:13px;font-weight:700;color:var(--muted);}
+.hero-paper-link{font-size:13px;font-weight:900;color:var(--navy);text-decoration:none;border-bottom:2px solid var(--orange);padding-bottom:2px;transition:color .15s,border-color .15s;}
+.hero-paper-link:hover{color:var(--orange);border-color:var(--navy);}
+
+/* Locked modal */
+.dm-modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(20,32,64,.45);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s;}
+.dm-modal-overlay.is-open{opacity:1;visibility:visible;}
+.dm-modal{background:#fff;border-radius:10px;border:1px solid var(--border);box-shadow:0 24px 64px rgba(20,32,64,.18);max-width:380px;width:100%;padding:28px 26px;text-align:center;}
+.dm-modal-lock{font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;}
+.dm-modal-title{font-size:18px;font-weight:900;color:var(--navy);margin-bottom:8px;line-height:1.3;}
+.dm-modal-sub{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:20px;}
+.dm-modal-close{font-family:'Lato',sans-serif;font-size:13px;font-weight:900;padding:10px 22px;border-radius:4px;border:none;background:var(--navy);color:#fff;cursor:pointer;}
+.dm-modal-close:hover{opacity:.9;}
 
 /* HOOK SECTION */
 .hook-section{background:#000;padding:48px 0;position:relative;overflow:hidden;}
@@ -126,8 +140,8 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 .story-h{font-size:14px;font-weight:900;color:var(--navy);line-height:1.25;margin-bottom:8px;}
 .story-t{font-size:12.5px;color:var(--muted);line-height:1.65;}
 
-/* LMS install mock */
-.lms-mock{max-width:920px;margin:0 auto;text-align:left;}
+/* Canvas install mock */
+.canvas-mock{max-width:920px;margin:0 auto;text-align:left;}
 .cm-chrome{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#fff;box-shadow:0 8px 32px rgba(27,61,107,.08);}
 .cm-global-nav{flex:0 0 48px;background:#394B58;display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:6px;}
 .cm-gn-dot{width:26px;height:26px;border-radius:6px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(255,255,255,.55);}
@@ -140,15 +154,16 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 .cm-crumb{font-size:12px;color:var(--light);margin-left:6px;font-weight:700;}
 .cm-top-actions{margin-left:auto;display:flex;align-items:center;gap:10px;}
 .cm-install-wrap{display:flex;align-items:center;gap:10px;}
-.cm-install-btn{font-family:'Lato',sans-serif;font-size:12px;font-weight:900;padding:8px 14px;border-radius:4px;border:1px solid var(--orange);background:var(--orange);color:#fff;cursor:pointer;transition:opacity .15s,transform .15s;}
-.cm-install-btn:hover{opacity:.9;transform:translateY(-1px);}
+.cm-install-btn{font-family:'Lato',sans-serif;font-size:12px;font-weight:900;padding:9px 16px;border-radius:4px;border:1px solid var(--orange);background:var(--orange);color:#fff;cursor:pointer;position:relative;overflow:visible;box-shadow:0 0 0 0 rgba(230,96,0,.55);animation:cmInstallGlow 2.4s ease-in-out infinite;transition:transform .15s,box-shadow .15s;}
+.cm-install-btn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 0 22px rgba(230,96,0,.65),0 8px 20px rgba(230,96,0,.35);animation:none;}
+@keyframes cmInstallGlow{0%,100%{box-shadow:0 0 0 0 rgba(230,96,0,.5),0 4px 14px rgba(230,96,0,.25);}50%{box-shadow:0 0 18px 4px rgba(230,96,0,.45),0 6px 18px rgba(230,96,0,.35);}}
 .cm-install-btn:disabled{opacity:.55;cursor:default;transform:none;}
 .cm-status{display:none;align-items:center;gap:8px;font-size:12px;font-weight:900;}
 .cm-status.installing{color:var(--muted);}
 .cm-status.installed{color:var(--green);}
-.lms-mock.is-installing .cm-status.installing{display:inline-flex;}
-.lms-mock.is-installed .cm-status.installed{display:inline-flex;}
-.lms-mock.is-installed .cm-install-btn{display:none;}
+.canvas-mock.is-installing .cm-status.installing{display:inline-flex;}
+.canvas-mock.is-installed .cm-status.installed{display:inline-flex;}
+.canvas-mock.is-installed .cm-install-btn{display:none;}
 .cm-spinner{width:14px;height:14px;border-radius:50%;border:2px solid rgba(0,0,0,.12);border-top-color:var(--orange);animation:cmSpin .9s linear infinite;}
 @keyframes cmSpin{to{transform:rotate(360deg);}}
 @keyframes cmIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
@@ -178,7 +193,7 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 
 /* DiscourseMap panel (appears after install) */
 .cm-dm-panel{display:none;margin:14px 18px 18px;border:1px solid var(--border);border-radius:6px;overflow:hidden;background:#fff;}
-.lms-mock.is-installed .cm-dm-panel{display:block;animation:cmIn .35s ease;}
+.canvas-mock.is-installed .cm-dm-panel{display:block;animation:cmIn .35s ease;}
 .cm-dm-collapsed{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--soft);border-bottom:1px solid var(--border);}
 .cm-dm-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(0,172,24,.12);}
 .cm-dm-title{font-size:12px;font-weight:900;color:var(--navy);}
@@ -186,10 +201,10 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 .cm-dm-actions{margin-left:auto;display:flex;align-items:center;gap:8px;}
 .cm-dm-btn{font-family:'Lato',sans-serif;font-size:11px;font-weight:900;padding:7px 10px;border-radius:4px;border:1px solid var(--border);background:#fff;color:var(--navy);cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:6px;text-decoration:none;}
 .cm-dm-btn:hover{border-color:#9AACB8;box-shadow:0 2px 10px rgba(0,0,0,.06);}
-.cm-dm-btn.primary{border-color:var(--orange);background:var(--orange);color:#fff;}
-.cm-dm-btn.primary:hover{opacity:.9;}
+.cm-dm-btn.primary{border-color:var(--orange);background:var(--orange);color:#fff;box-shadow:0 0 0 0 rgba(230,96,0,.55);animation:cmInstallGlow 2.4s ease-in-out infinite;transition:transform .15s,box-shadow .15s;}
+.cm-dm-btn.primary:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 0 22px rgba(230,96,0,.65),0 8px 20px rgba(230,96,0,.35);animation:none;border-color:var(--orange);}
 .cm-dm-expanded{display:none;background:#f8fafc;}
-.lms-mock.dm-open .cm-dm-expanded{display:block;}
+.canvas-mock.dm-open .cm-dm-expanded{display:block;}
 .cm-dm-expanded-head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid var(--border);background:#fff;}
 .cm-dm-expanded-left{display:flex;align-items:center;gap:10px;min-width:0;}
 .cm-dm-expanded-left img{width:18px;height:18px;object-fit:contain;}
@@ -198,9 +213,9 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 .cm-dm-preview{padding:10px 12px;}
 .cm-dm-preview img{width:100%;height:auto;display:block;border:1px solid var(--border);border-radius:6px;}
 .cm-dm-note{padding:0 12px 12px;font-size:11px;color:var(--muted);line-height:1.5;}
-.lms-mock-foot{text-align:center;margin-top:16px;font-size:13px;}
-.lms-mock-foot a{color:var(--blue);font-weight:700;text-decoration:none;}
-.lms-mock-foot a:hover{text-decoration:underline;}
+.canvas-mock-foot{text-align:center;margin-top:16px;font-size:13px;}
+.canvas-mock-foot a{color:var(--blue);font-weight:700;text-decoration:none;}
+.canvas-mock-foot a:hover{text-decoration:underline;}
 
 /* STATS */
 .stats-row{background:var(--navy);}
@@ -381,7 +396,7 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
     <span class="nav-name">discoursemap</span>
   </a>
   <div class="nav-div"></div>
-  <span class="nav-sub">An LMS Plugin</span>
+  <span class="nav-sub">A Canvas Plugin</span>
   <ul class="nav-links">
     <li><a href="#features">Features</a></li>
     <li><a href="#implementation-kit">Implementation Kit</a></li>
@@ -392,12 +407,16 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">LMS Plugin &nbsp;·&nbsp; Teachers College, Columbia University</div>
+  <div class="hero-eyebrow">Canvas Plugin &nbsp;·&nbsp; Teachers College, Columbia University</div>
   <h1 class="hero-title">See what your discussion<br>is <span class="accent">actually saying.</span></h1>
   <p class="hero-sub">DiscourseMap transforms flat discussion threads into a live spatial map — showing what's been explored, where consensus is forming, and what's been left unsaid.</p>
   <div class="hero-actions">
-    <a href="#demo" class="btn btn-primary">See it in your LMS ↓</a>
+    <a href="#demo" class="btn btn-primary">See it in Canvas ↓</a>
     <a href="#implementation-kit" class="btn btn-ghost">Implementation Kit</a>
+  </div>
+  <div class="hero-paper">
+    <span class="hero-paper-label">Read the Paper:</span>
+    <a class="hero-paper-link" href="https://docs.google.com/document/d/1CpBV_o4I20QaiyWPyAxsfz6g0D24mTuU/edit?usp=sharing&ouid=108357012344182690513&rtpof=true&sd=true" target="_blank" rel="noopener">DiscourseMap research paper ↗</a>
   </div>
 </section>
 
@@ -422,7 +441,7 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
   <div class="problem-inner">
     <div>
       <div class="section-label">The Problem</div>
-      <h2 class="section-title">LMS discussions hide the structure of thinking.</h2>
+      <h2 class="section-title">Canvas discussions hide the structure of thinking.</h2>
       <p class="section-sub" style="max-width:720px">
         In graduate seminars, asynchronous forums are meant to support reflective, student-led dialogue. In practice, many students post minimally, choose reply targets based on convenience, and stop once requirements are met — not because of low motivation, but because the interface makes it hard to see where ideas connect, diverge, or need improvement.
       </p>
@@ -432,7 +451,7 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
       <div class="problem-kicker">Structural limitation</div>
       <div class="problem-h">Flat chronological threads → low epistemic visibility</div>
       <p class="problem-p">
-        Typical LMS forums present posts as linear lists. That structure makes it difficult for learners (and instructors) to grasp the discussion’s epistemic landscape in real time.
+        Typical Canvas forums present posts as linear lists. That structure makes it difficult for learners (and instructors) to grasp the discussion’s epistemic landscape in real time.
       </p>
       <div class="problem-list">
         <div class="problem-li">
@@ -465,7 +484,7 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
       <div class="story-card">
         <div class="story-tag"><span class="story-icon">★</span>Layer</div>
         <div class="story-h">Keep the thread</div>
-        <div class="story-t">No migration. Students read and write in the normal LMS discussion board.</div>
+        <div class="story-t">No migration. Students read and write in the normal Canvas discussion board.</div>
       </div>
       <div class="story-card">
         <div class="story-tag"><span class="story-icon">★</span>Reveal</div>
@@ -484,8 +503,8 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
 <!-- INSTALL CTA -->
 <section class="install-section" id="install">
   <div class="install-title">Install DiscourseMap in your course.</div>
-  <div class="install-sub">One click. No configuration. Works directly within your existing LMS discussion boards — no platform migration needed.</div>
-  <div class="lms-mock" id="demo">
+  <div class="install-sub">One click. No configuration. Works directly within your existing Canvas discussion boards — no platform migration needed.</div>
+  <div class="canvas-mock" id="demo">
     <div class="cm-chrome">
       <div class="cm-global-nav" aria-hidden="true">
         <div class="cm-gn-dot on">▣</div>
@@ -620,7 +639,7 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
         </div>
       </div>
     </div>
-    <p class="lms-mock-foot"><a href="https://haetalkim.github.io/discourse-map/" target="_blank" rel="noopener">Open interactive demo in a new tab ↗</a></p>
+    <p class="canvas-mock-foot"><a href="https://haetalkim.github.io/discourse-map/" target="_blank" rel="noopener">Open interactive demo in a new tab ↗</a></p>
   </div>
 </section>
 
@@ -923,23 +942,23 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
   <div class="faq-inner observe">
     <div class="section-label">FAQ</div>
     <h2 class="section-title">Common questions</h2>
-    <p class="section-sub">Quick answers for instructors adopting DiscourseMap in an LMS course.</p>
+    <p class="section-sub">Quick answers for instructors adopting DiscourseMap in a Canvas course.</p>
     <div class="faq-list" id="faq-list">
       <div class="faq-item open">
         <button type="button" class="faq-q">How do I add DiscourseMap to an existing course?</button>
-        <div class="faq-a">Install the plugin from your institution’s LMS app directory, then enable it on the discussion boards you want to enhance. No student accounts or separate login are required.</div>
+        <div class="faq-a">Install the plugin from your institution’s Canvas app directory, then enable it on the discussion boards you want to enhance. No student accounts or separate login are required.</div>
       </div>
       <div class="faq-item">
         <button type="button" class="faq-q">Does DiscourseMap replace our discussion tool?</button>
-        <div class="faq-a">No. Students continue reading and posting in the native LMS thread. DiscourseMap adds a visualization layer on top—structure, gaps, and prompts appear alongside familiar workflows.</div>
+        <div class="faq-a">No. Students continue reading and posting in the native Canvas thread. DiscourseMap adds a visualization layer on top—structure, gaps, and prompts appear alongside familiar workflows.</div>
       </div>
       <div class="faq-item">
         <button type="button" class="faq-q">What do students see before they post?</button>
         <div class="faq-a">Until a student contributes to the thread, the map stays collapsed. After their first post, they can expand the map to explore clusters and suggested contribution areas.</div>
       </div>
       <div class="faq-item">
-        <button type="button" class="faq-q">Is discussion content stored outside the LMS?</button>
-        <div class="faq-a">Posts remain in your LMS. The map layer processes thread text to generate clusters and indicators; your institution’s data policies for the LMS still apply.</div>
+        <button type="button" class="faq-q">Is discussion content stored outside Canvas?</button>
+        <div class="faq-a">Posts remain in Canvas. The map layer processes thread text to generate clusters and indicators; your institution’s data policies for Canvas still apply.</div>
       </div>
       <div class="faq-item">
         <button type="button" class="faq-q">Can I use this in large courses?</button>
@@ -951,11 +970,22 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
         <h3>Still need help?</h3>
         <p>Book a one-on-one session with an implementation specialist. We’ll walk through setup, facilitation moves, and how to align DiscourseMap with your syllabus.</p>
       </div>
-      <a href="#" class="btn btn-ghost" role="button">Talk to an expert</a>
+      <a href="mailto:jiinhur@gmail.com" class="btn btn-ghost">Talk to an expert</a>
     </div>
   </div>
 </section>
 
+
+
+<!-- Locked resource modal -->
+<div class="dm-modal-overlay" id="dm-locked-modal" aria-hidden="true">
+  <div class="dm-modal" role="dialog" aria-modal="true" aria-labelledby="dm-modal-title">
+    <div class="dm-modal-lock">Locked</div>
+    <div class="dm-modal-title" id="dm-modal-title">LOCKED—Contact Administrator</div>
+    <p class="dm-modal-sub">This resource is available through your institution. Please contact your Canvas administrator to request access.</p>
+    <button type="button" class="dm-modal-close" id="dm-modal-close">OK</button>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -987,8 +1017,27 @@ body{font-family:'Lato',sans-serif;color:var(--text);background:#fff;overflow-x:
       if (!open) item.classList.add('open');
     });
   });
-  document.querySelectorAll('.kit-card, .faq-expert .btn').forEach(function (el) {
-    el.addEventListener('click', function (e) { e.preventDefault(); });
+  var lockedModal = document.getElementById('dm-locked-modal');
+  var lockedClose = document.getElementById('dm-modal-close');
+  function openLockedModal() {
+    if (!lockedModal) return;
+    lockedModal.classList.add('is-open');
+    lockedModal.setAttribute('aria-hidden', 'false');
+  }
+  function closeLockedModal() {
+    if (!lockedModal) return;
+    lockedModal.classList.remove('is-open');
+    lockedModal.setAttribute('aria-hidden', 'true');
+  }
+  document.querySelectorAll('.kit-card:not(.kit-card--soon)').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      openLockedModal();
+    });
+  });
+  if (lockedClose) lockedClose.addEventListener('click', closeLockedModal);
+  if (lockedModal) lockedModal.addEventListener('click', function (e) {
+    if (e.target === lockedModal) closeLockedModal();
   });
 })();
 
@@ -1016,9 +1065,9 @@ function switchTab(id, btn) {
   }
 }
 
-// LMS install mock — simulate install buffer, then reveal DiscourseMap view
+// Canvas install mock — simulate install buffer, then reveal DiscourseMap view
 (function () {
-  const root = document.querySelector('.lms-mock');
+  const root = document.querySelector('.canvas-mock');
   const btn = document.getElementById('cm-install-btn');
   if (!root || !btn) return;
   const dmToggle = document.getElementById('cm-dm-toggle');
